@@ -6,7 +6,8 @@ class Floor(models.Model):
      _description = 'Floor'
 
      building_id = fields.Many2one("building.building")
-     room_ids = fields.One2many("building.room")
+     room_ids = fields.One2many("building.room", "floor_id")
+     branch_id = fields.Many2one("building.branch")
 
 
 

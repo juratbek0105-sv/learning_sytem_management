@@ -10,6 +10,7 @@ class Group(models.Model):
      student_ids = fields.Many2many("lms.student", string="Students")
      teacher_id = fields.Many2one("lms.teacher")
      schedule_ids = fields.One2many("edu.schedule", "group_id", string="Schedule")
+     lesson_ids = fields.One2many("edu.lesson", "group_id")
      state = fields.Selection([
          ('active', 'Active'),
          ('frozen', 'Frozen'),

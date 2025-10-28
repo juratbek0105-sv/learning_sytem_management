@@ -7,10 +7,10 @@ class Building(models.Model):
 
      name = fields.Char()
      address = fields.Char()
-     is_open = fields.Boolean(default=True)
+     active = fields.Boolean(default=True)
 
-     room_ids = fields.One2many("building.room")
-     floor_ids = fields.One2many('building.floor', string="Floor")
+     room_ids = fields.One2many("building.room", "building_id")
+     floor_ids = fields.One2many('building.floor', "building_id", string="Floor")
      branch_id = fields.Many2one("building.branch")
 
 

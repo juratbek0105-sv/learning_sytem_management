@@ -7,3 +7,5 @@ class Course(models.Model):
 
 
 
+
+

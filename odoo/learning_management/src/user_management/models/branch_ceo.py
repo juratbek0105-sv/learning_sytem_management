@@ -7,7 +7,7 @@ class BranchCeo(models.Model):
     _inherits = {"res.users": 'user_id'}
 
     user_id = fields.Many2one("res.users")
-    branch_ceo_id = fields.One2many(
+    branch_id = fields.One2many(
         "building.branch",
         "ceo_id",
         string="Branches"

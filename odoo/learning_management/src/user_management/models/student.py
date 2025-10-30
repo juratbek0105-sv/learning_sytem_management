@@ -6,6 +6,7 @@ class Student(models.Model):
     _name = "lms.student"
     _inherits = {"res.users": 'user_id'}
 
+    student_number = fields.Char()
     user_id = fields.Many2one("res.users")
     teacher_ids = fields.Many2many("lms.teacher")
     group_ids = fields.Many2many("edu.group")

@@ -15,6 +15,24 @@ class Task(models.Model):
      lesson_id = fields.Many2one("edu.lesson")
      student_ids = fields.Many2many("lms.student", string="Assigned Students")
 
+     state = fields.Selection([
+         ('draft', 'Draft'),
+         ('assigned', 'Assigned'),
+         ('submitted', 'Submitted'),
+         ('reviewed', 'Reviewed'),
+         ('closed', 'Closed'),
+     ], default='draft')
+
+     submission_ids = fields.One2many("edu.homework.submission", "homework_id")
+
+     def action_assign(self):
+         for rec in self:
+             rec.state = "assigned"
+
+     def action_close(self):
+         for rec in self:
+             rec.state = "closed"
+
 
 
 

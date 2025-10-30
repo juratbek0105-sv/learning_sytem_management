@@ -5,7 +5,7 @@ class Language(models.Model):
     _name = 'edu.language'
     _description = 'Languages'
 
-
+    name = fields.Char()
     user_id = fields.Many2one("res.users")
 
 

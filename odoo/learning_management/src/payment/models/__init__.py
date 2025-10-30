@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import monthly_payments
+from . import salary
 from . import edu_payment
 from . import kpi
 from . import coupon

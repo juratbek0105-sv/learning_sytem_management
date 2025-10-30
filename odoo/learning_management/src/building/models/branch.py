@@ -12,7 +12,9 @@ class Branch(models.Model):
 
      building_id = fields.Many2one("building.building", "branch_id")
      room_ids = fields.One2many("building.room", "branch_id")
-     floor_ids = fields.One2many('building.floor', 'branch_id', string="Floor")
+     ceo_id = fields.Many2one("lms.ceo")
+     branch_ceo_ids = fields.One2many("lms.branch.ceo", "branch_ceo_id")
+
 
 
 

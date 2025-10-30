@@ -6,6 +6,10 @@ class Language(models.Model):
     _description = 'Languages'
 
 
+    user_id = fields.Many2one("res.users")
+
+
+
 
 
 

@@ -11,6 +11,14 @@ class Student(models.Model):
     group_ids = fields.Many2many("edu.group")
     course_ids = fields.Many2many("edu.course")
 
+    @api.model_create_multi
+    def create(self, vals):
+        record = super(Student, self).create(vals)
+        if record.user_id:
+            record.user_id.user_type = 'student'
+        return record
+
+
 
 
 

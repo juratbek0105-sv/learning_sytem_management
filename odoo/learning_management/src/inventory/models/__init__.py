@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from . import edu_materials
+from . import material
 from . import device
 from . import needs

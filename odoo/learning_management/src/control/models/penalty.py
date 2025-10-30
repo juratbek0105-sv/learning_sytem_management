@@ -6,9 +6,14 @@ class Penalty(models.Model):
      _description = 'Penalty'
 
      user_id = fields.Many2one("res.users")
-     reason = fields.Char()
-     amount = fields.Float()
+     amount = fields.Float(required=True)
+     reason = fields.Text(string="Reason", required=True)
      active = fields.Boolean(default=True)
+     status = fields.Selection([
+         ("draft", "Draft"),
+         ("paid", "Paid"),
+         ("cancelled", "Cancelled"),
+     ], default="draft")
 
 
 

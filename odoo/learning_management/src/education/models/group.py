@@ -9,7 +9,7 @@ class Group(models.Model):
      course_id = fields.Many2one("edu.course")
      student_ids = fields.Many2many("lms.student", string="Students")
      teacher_id = fields.Many2one("lms.teacher")
-     schedule_ids = fields.One2many("edu.schedule", "group_id", string="Schedule")
+     timetable_id = fields.One2many("edu.timetable", "group_id", string="Timetable")
      lesson_ids = fields.One2many("edu.lesson", "group_id")
      state = fields.Selection([
          ('active', 'Active'),

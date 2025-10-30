@@ -2,13 +2,13 @@ from odoo import models, fields, api
 
 
 class Assignment(models.Model):
-     _name = 'edu.assignment'
-     _description = 'Assignment'
+    _name = 'edu.assignment'
+    _description = 'Assignment'
 
-     course_id = fields.Many2one("edu.course")
-     group_id = fields.Many2one("edu.group")
+    name = fields.Char(string="Assignment", required=True)
+    description = fields.Text(string="Task Description")
+    deadline = fields.Datetime(string="Deadline")
 
-
-
-
-
+    course_id = fields.Many2one("edu.course")
+    group_id = fields.Many2one("edu.group")
+    student_ids = fields.Many2many("lms.student", string="Assigned Students")

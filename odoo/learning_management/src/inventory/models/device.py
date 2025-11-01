@@ -12,7 +12,22 @@ class Device(models.Model):
          ("broken", "Broken"),
          ("moved", "Moved to Another Branch"),
      ], default="working")
-     branch_id = fields.Many2one("building.branch")
+     purchase_date = fields.Date(string="Purchase Date")
+     purchase_cost = fields.Float(string="Purchase Cost")
+
+     branch_id = fields.Many2one('res.branch', required=True)
+
+     def action_send_to_repair(self):
+         for record in self:
+             record.condition = 'repair'
+
+     def action_mark_broken(self):
+         for record in self:
+             record.condition = 'broken'
+
+     def action_mark_moved(self):
+         for record in self:
+             record.condition = 'moved'
 
 
 

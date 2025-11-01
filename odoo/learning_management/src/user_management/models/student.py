@@ -3,12 +3,12 @@ from odoo import models, fields, api
 
 
 class Student(models.Model):
-    _name = "lms.student"
+    _name = "user.student"
     _inherits = {"res.users": 'user_id'}
 
     student_number = fields.Char()
     user_id = fields.Many2one("res.users")
-    teacher_ids = fields.Many2many("lms.teacher")
+    teacher_ids = fields.Many2many("user.teacher")
     group_ids = fields.Many2many("edu.group")
     course_ids = fields.Many2many("edu.course")
 

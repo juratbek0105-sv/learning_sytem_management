@@ -3,7 +3,7 @@ from odoo import models, fields, api
 
 
 class Operator(models.Model):
-    _name = "lms.operator"
+    _name = "user.operator"
     _inherits = {"res.users": 'user_id'}
 
     user_id = fields.Many2one("res.users")

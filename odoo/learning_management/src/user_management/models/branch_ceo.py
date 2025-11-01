@@ -3,15 +3,11 @@ from odoo import models, fields, api
 
 
 class BranchCeo(models.Model):
-    _name = "lms.branch.ceo"
+    _name = "user.branch.ceo"
     _inherits = {"res.users": 'user_id'}
 
     user_id = fields.Many2one("res.users")
-    branch_id = fields.One2many(
-        "building.branch",
-        "ceo_id",
-        string="Branches"
-    )
+    branch_id = fields.Many2one('res.branch', required=True)
 
     @api.model_create_multi
     def create(self, vals):

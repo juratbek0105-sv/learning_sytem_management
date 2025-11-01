@@ -14,5 +14,14 @@ class EduMaterials(models.Model):
         ('expired', 'Expired')
     ], default='new')
 
-    branch_id = fields.Many2one("res.branch", string="Branch")
+
+    branch_id = fields.Many2one('res.branch',required=True)
     responsible_id = fields.Many2one("res.users", string="Responsible Person")
+
+    def action_material_broken(self):
+        for record in self:
+            record.condition = "broken"
+
+    def action_material_expire(self):
+        for record in self:
+            record.condition = "expired"

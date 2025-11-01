@@ -5,8 +5,8 @@ class Room(models.Model):
     _name = 'building.room'
     _description = 'Room'
 
-    name = fields.Char()
-    active = fields.Boolean()
+    name = fields.Char(required=True)
+    active = fields.Boolean(default=True)
     capacity = fields.Integer(string="Capacity")
 
     floor_id = fields.Many2one('building.floor', string="Floor")
@@ -24,3 +24,7 @@ class Room(models.Model):
         ("occupied", "Occupied"),
         ("repair", "Under Repair"),
     ], string="Status", default="available")
+
+    def action_toggle_room(self):
+        for record in self:
+            record.active = not record.active

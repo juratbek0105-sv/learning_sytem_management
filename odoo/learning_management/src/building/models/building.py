@@ -12,4 +12,8 @@ class Building(models.Model):
     manager_id = fields.Many2one("res.users", string="Building Manager")
     room_ids = fields.One2many("building.room", "building_id")
     floor_ids = fields.One2many('building.floor', "building_id", string="Floor")
-    branch_id = fields.Many2one("building.branch")
+    branch_id = fields.Many2one('res.branch',required=True)
+
+    def action_toggle_building(self):
+        for record in self:
+            record.active = not record.active

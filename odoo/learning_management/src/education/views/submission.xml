@@ -25,12 +25,12 @@
                                 string="Mark as Reviewed"
                                 class="btn-success"
                                 icon="fa-check"
-                                attrs="{'invisible': [('state', '=', 'reviewed')]}"/>
+                                modifiers="{'invisible': [('state', '=', 'reviewed')]}"/>
                         <button name="action_return" type="object"
                                 string="Return"
                                 class="btn-secondary"
                                 icon="fa-undo"
-                                attrs="{'invisible': [('state', '=', 'returned')]}"/>
+                                modifiers="{'invisible': [('state', '=', 'returned')]}"/>
                         <field name="state" widget="statusbar"
                                statusbar_visible="submitted,reviewed,returned"/>
                     </header>

@@ -23,7 +23,7 @@ class Task(models.Model):
          ('closed', 'Closed'),
      ], default='draft')
 
-     submission_ids = fields.One2many("edu.task.submission", "homework_id")
+     submission_ids = fields.One2many("edu.task.submission", "task_id")
 
      def action_assign(self):
          for rec in self:

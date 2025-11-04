@@ -25,7 +25,7 @@
                                 string="Deactivate"
                                 class="btn-primary"
                                 icon="fa-toggle-off"
-                                attrs="{'invisible': [('active', '=', False)]}"/>
+                                modifiers="{'invisible': [('active', '=', False)]}"/>
 
                         <button name="action_toggle_group"
                                 type="object"
@@ -51,11 +51,11 @@
 
                     <notebook>
                         <page string="Timetable">
-                            <field name="timetable_id" context="{'default_group_id': active_id}"/>
+                            <field name="timetable_id" context="{'default_group_id': id}"/>
                         </page>
 
                         <page string="Lessons">
-                            <field name="lesson_ids" context="{'default_group_id': active_id}"/>
+                            <field name="lesson_ids" context="{'default_group_id': id}"/>
                         </page>
                     </notebook>
                 </sheet>

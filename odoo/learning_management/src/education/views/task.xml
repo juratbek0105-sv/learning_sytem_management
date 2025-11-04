@@ -25,11 +25,11 @@
                         <button name="action_assign" type="object"
                                 string="Assign" class="btn-primary"
                                 icon="fa-send"
-                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                                modifiers="{'invisible': [('state', '!=', 'draft')]}"/>
                         <button name="action_close" type="object"
                                 string="Close Task" class="btn-secondary"
                                 icon="fa-lock"
-                                attrs="{'invisible': [('state', 'in', ('closed', 'draft'))]}"/>
+                                modifiers="{'invisible': [('state', 'in', ('closed', 'draft'))]}"/>
                         <field name="state" widget="statusbar"
                                statusbar_visible="draft,assigned,submitted,reviewed,closed"/>
                     </header>
@@ -53,12 +53,12 @@
                         </page>
                         <page string="Submissions">
                             <field name="submission_ids">
-                                <tree string="Submissions">
+                                <list string="Submissions">
                                     <field name="student_id"/>
                                     <field name="submit_date"/>
                                     <field name="mark"/>
                                     <field name="state"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>

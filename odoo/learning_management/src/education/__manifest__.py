@@ -2,7 +2,7 @@
 {
     'name': " LMS education",
 
-    'depends': ['user_management', 'mail.thread', 'mail.activity.mixin'],
+    'depends': ['user_management', 'mail'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -16,6 +16,8 @@
         'views/submission.xml',
         'views/task.xml',
         'views/timetable.xml',
+        'views/inherit_views/student_inherit.xml',
+        'views/inherit_views/teacher_inherit.xml',
         'views/menu.xml',
     ],
 }

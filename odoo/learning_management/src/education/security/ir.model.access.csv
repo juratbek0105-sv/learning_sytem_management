@@ -6,6 +6,6 @@ access_education_language_user,access_education_language_user,model_edu_language
 access_education_lesson_user,access_education_lesson_user,model_edu_lesson,base.group_user,1,1,1,1
 access_education_performance_user,access_education_performance_user,model_edu_performance,base.group_user,1,1,1,1
 access_education_subject_user,access_education_subject_user,model_edu_subject,base.group_user,1,1,1,1
-access_education_submission_user,access_education_submission_user,model_edu_submission,base.group_user,1,1,1,1
+access_education_submission_user,access_education_submission_user,model_edu_task_submission,base.group_user,1,1,1,1
 access_education_task_user,access_education_task_user,model_edu_task,base.group_user,1,1,1,1
 access_education_timetable_user,access_education_timetable_user,model_edu_timetable,base.group_user,1,1,1,1

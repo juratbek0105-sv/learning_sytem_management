@@ -15,7 +15,7 @@ class Course(models.Model):
 
     subject_ids = fields.Many2many("edu.subject")
     group_ids = fields.One2many("edu.group", "course_id")
-    teacher_id = fields.Many2many("edu.teacher", tracking=True)
+    teacher_ids = fields.Many2many("edu.teacher", tracking=True)
 
 
     @api.constrains('duration')

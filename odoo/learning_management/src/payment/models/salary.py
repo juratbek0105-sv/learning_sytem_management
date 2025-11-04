@@ -25,8 +25,8 @@ class Salary(models.Model):
 
     @api.depends("base_salary", "bonus")
     def _compute_total(self):
-        for rec in self:
-            rec.total_salary = rec.base_salary + rec.bonus
+        for record in self:
+            record.total_salary = record.base_salary + record.bonus
 
 
 

@@ -8,6 +8,7 @@ class Teacher(models.Model):
 
     user_id = fields.Many2one("res.users", required=True, ondelete="cascade")
 
+
     @api.model_create_multi
     def create(self, vals_list):
         records = super(Teacher, self).create(vals_list)

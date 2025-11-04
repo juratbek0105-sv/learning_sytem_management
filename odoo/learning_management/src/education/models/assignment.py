@@ -12,7 +12,7 @@ class Assignment(models.Model):
     max_score = fields.Float(default=100)
     pass_score = fields.Float()
     exam_date = fields.Datetime(string="Exam Date", required=True, tracking=True)
-    duration = fields.Float()(required=True, tracking=True)
+    duration = fields.Float(required=True, tracking=True)
     exam_type = fields.Selection([
         ('written', 'Written'),
         ('oral', 'Oral'),

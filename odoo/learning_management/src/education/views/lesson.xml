@@ -44,7 +44,7 @@
                             <field name="description" nolabel="1"/>
                         </page>
                         <page string="Tasks">
-                            <field name="task_ids" context="{'default_lesson_id': active_id}"/>
+                            <field name="task_ids" context="{'default_lesson_id': id}"/>
                         </page>
                     </notebook>
                 </sheet>

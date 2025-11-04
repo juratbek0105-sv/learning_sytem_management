@@ -4,7 +4,7 @@
 
 
 
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [

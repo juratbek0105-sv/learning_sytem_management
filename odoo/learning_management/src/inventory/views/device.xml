@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_device_list" model="ir.ui.view">
+        <field name="name">inventory.device.list</field>
+        <field name="model">inventory.device</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="purchase_date"/>
+                <field name="purchase_cost"/>
+                <field name="branch_id"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_device_form" model="ir.ui.view">
+        <field name="name">inventory.device.form</field>
+        <field name="model">inventory.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="action_send_to_repair" type="object"
+                                string="Send to Repair" class="btn-primary"/>
+                        <button name="action_mark_broken" type="object"
+                                string="Mark as broken"
+                                class="btn-primary"/>
+                        <button name="action_mark_moved" type="object"
+                                string="Move"
+                                class="btn-primary"/>
+                    </header>
+                    <group>
+                        <field name="name"/>
+                        <field name="purchase_date"/>
+                        <field name="purchase_cost"/>
+                        <field name="branch_id"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_device" model="ir.actions.act_window">
+        <field name="name">Devices</field>
+        <field name="res_model">inventory.device</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_device_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_device_form')})
+        ]"/>
+    </record>
+</odoo>

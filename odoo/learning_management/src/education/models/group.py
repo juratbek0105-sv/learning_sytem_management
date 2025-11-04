@@ -16,7 +16,7 @@ class Group(models.Model):
 
      course_id = fields.Many2one("edu.course")
      student_ids = fields.Many2many("user.student", string="Students")
-     teacher_id = fields.Many2many("user.teacher")
+     teacher_ids = fields.Many2many("user.teacher")
      timetable_id = fields.One2many("edu.timetable", "group_id", string="Timetable")
      lesson_ids = fields.One2many("edu.lesson", "group_id")
 

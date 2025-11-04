@@ -5,9 +5,11 @@ from odoo import models, fields, api
 class CEO(models.Model):
     _name = "user.ceo"
     _inherits = {"res.users": 'user_id'}
+    _inherit = ['user.worker.info']
 
-    user_id = fields.Many2one("res.users")
-    branch_id = fields.One2many('res.branch', "ceo_id", required=True)
+
+    user_id = fields.Many2one("res.users", required=True, ondelete="cascade")
+    company_ids = fields.Many2one('res.company', required=True)
 
 
     @api.model_create_multi

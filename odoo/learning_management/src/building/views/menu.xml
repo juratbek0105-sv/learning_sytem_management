@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="menu_building_root" string="Building">
+            <menuitem id="menu_building" action="action_building"/>
+            <menuitem id="menu_coworking" action="action_coworking"/>
+            <menuitem id="menu_floor" action="action_floor"/>
+            <menuitem id="menu_room" action="action_room"/>
+        </menuitem>
+    </data>
+</odoo>

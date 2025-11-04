@@ -7,10 +7,9 @@ class Student(models.Model):
     _inherits = {"res.users": 'user_id'}
 
     student_number = fields.Char()
-    user_id = fields.Many2one("res.users")
+    user_id = fields.Many2one("res.users", required=True, ondelete="cascade")
     teacher_ids = fields.Many2many("user.teacher")
-    group_ids = fields.Many2many("edu.group")
-    course_ids = fields.Many2many("edu.course")
+
 
     @api.model_create_multi
     def create(self, vals):

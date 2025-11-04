@@ -9,4 +9,5 @@ from . import subject
 from . import language
 from . import task
 from . import submission
+from . import user_education
 

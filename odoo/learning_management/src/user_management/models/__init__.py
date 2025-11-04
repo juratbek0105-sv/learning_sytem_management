@@ -1,4 +1,5 @@
 from . import user
+from . import worker
 from . import teacher
 from . import student
 from . import accountant
@@ -6,3 +7,4 @@ from . import ceo
 from . import branch_ceo
 from . import hr
 from . import operator
+from . import work_places

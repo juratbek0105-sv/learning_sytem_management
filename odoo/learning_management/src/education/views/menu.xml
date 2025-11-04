@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="menu_education_root" name="Education">
+            <menuitem id="menu_assignment" action="action_assignment"/>
+            <menuitem id="menu_course" action="action_course"/>
+            <menuitem id="menu_group" action="action_group"/>
+            <menuitem id="menu_edu_language" name="Languages" action="action_edu_language"/>
+            <menuitem id="menu_lesson" action="action_lesson"/>
+            <menuitem id="menu_performance" action="action_performance"/>
+            <menuitem id="menu_subject" action="action_subject"/>
+            <menuitem id="menu_submission" action="action_task_submission"/>
+            <menuitem id="menu_task" action="action_task"/>
+            <menuitem id="menu_timetable" action="action_timetable"/>
+        </menuitem>
+    </data>
+</odoo>

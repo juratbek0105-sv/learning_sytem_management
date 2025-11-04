@@ -14,7 +14,6 @@ class Timetable(models.Model):
 
 
      group_id = fields.Many2one("edu.group")
-     room_id = fields.Many2one("building.room")
 
 
 

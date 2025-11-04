@@ -21,7 +21,7 @@ class Course(models.Model):
     @api.constrains('duration')
     def _check_duration(self):
         for rec in self:
-            if rec.duration_months <= 0:
+            if rec.duration <= 0:
                 raise ValidationError(_("Duration must be greater than zero."))
 
 

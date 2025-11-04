@@ -6,18 +6,23 @@ class EduPayments(models.Model):
     _description = 'Edu Payment'
 
     student_id = fields.Many2one("res.users")
-    course_id = fields.Many2one("edu.course")
     amount = fields.Float()
-    payment_date = fields.Date(string="Payment Date", default=fields.Date.today)
-    payment_type = fields.Selection([
-        ('tuition', 'Course Payment'),
-        ('material', 'Material Payment'),
-        ('salary', 'Salary'),
-        ('expense', 'Expense')
-    ])
+    payment_date = fields.Date()
     status = fields.Selection([
         ('paid', 'Paid'),
         ('cancelled', 'Cancelled'),
         ('refunded', 'Refunded')
     ], default='paid')
-    note = fields.Text(string="Notes")
+    note = fields.Text()
+
+
+    @api.onchange('group_id')
+    def _onchange_group_id(self):
+        if self.group_id:
+            return {
+                'domain': {'student_id': [('group_id', '=', self.group_id.id)]}
+            }
+        else:
+            return {
+                'domain': {'student_id': []}
+            }

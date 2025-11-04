@@ -13,7 +13,7 @@ class Task(models.Model):
      course_id = fields.Many2one("edu.course")
      group_id = fields.Many2one("edu.group")
      lesson_id = fields.Many2one("edu.lesson")
-     student_ids = fields.Many2many("lms.student", string="Assigned Students")
+     student_ids = fields.Many2many("user.student", string="Assigned Students")
 
      state = fields.Selection([
          ('draft', 'Draft'),
@@ -23,7 +23,7 @@ class Task(models.Model):
          ('closed', 'Closed'),
      ], default='draft')
 
-     submission_ids = fields.One2many("edu.homework.submission", "homework_id")
+     submission_ids = fields.One2many("edu.task.submission", "homework_id")
 
      def action_assign(self):
          for rec in self:

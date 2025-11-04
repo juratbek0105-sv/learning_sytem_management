@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_assignment_list" model="ir.ui.view">
+        <field name="name">edu.assignment.list</field>
+        <field name="model">edu.assignment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="subject_id"/>
+                <field name="group_id"/>
+                <field name="exam_date"/>
+                <field name="duration"/>
+                <field name="exam_type"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_assignment_form" model="ir.ui.view">
+        <field name="name">edu.assignment.form</field>
+        <field name="model">edu.assignment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="subject_id"/>
+                            <field name="course_id"/>
+                            <field name="group_id"/>
+                            <field name="exam_type"/>
+                            <field name="exam_date"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="max_score"/>
+                            <field name="pass_score"/>
+                            <field name="deadline"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Assigned Students">
+                            <field name="student_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="Results">
+                            <field name="result_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_assignment" model="ir.actions.act_window">
+        <field name="name">Assignments</field>
+        <field name="res_model">edu.assignment</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_assignment_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_assignment_form')})
+        ]"/>
+    </record>
+</odoo>

@@ -15,7 +15,7 @@ class Device(models.Model):
      purchase_date = fields.Date(string="Purchase Date")
      purchase_cost = fields.Float(string="Purchase Cost")
 
-     branch_id = fields.Many2one('res.branch', required=True)
+     branch_id = fields.Many2one('res.company', required=True)
 
      def action_send_to_repair(self):
          for record in self:

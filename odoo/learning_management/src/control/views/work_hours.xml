@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_work_hours_list" model="ir.ui.view">
+        <field name="name">control.work.hours.list</field>
+        <field name="model">control.work.hours</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="status=='working'" decoration-success="status=='completed'"
+                  decoration-danger="status=='absent'">
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="total_hours"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_work_hours_form" model="ir.ui.view">
+        <field name="name">control.work.hours.form</field>
+        <field name="model">control.work.hours</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="working,completed,absent"/>
+                    </header>
+
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                            <field name="total_hours" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_work_hours" model="ir.actions.act_window">
+        <field name="name">Work.hours</field>
+        <field name="res_model">control.work.hours</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_work_hours_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_work_hours_form')})
+        ]"/>
+    </record>
+</odoo>

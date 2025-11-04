@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_coworking_list" model="ir.ui.view">
+        <field name="name">building.coworking.list</field>
+        <field name="model">building.coworking</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="building_id"/>
+                <field name="capacity"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_coworking_form" model="ir.ui.view">
+        <field name="name">building.coworking.form</field>
+        <field name="model">building.coworking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="building_id"/>
+                        <field name="capacity"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_coworking" model="ir.actions.act_window">
+        <field name="name">Coworking</field>
+        <field name="res_model">building.coworking</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_coworking_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_coworking_form')})
+        ]"/>
+    </record>
+</odoo>

@@ -5,8 +5,10 @@ from odoo import models, fields, api
 class HR(models.Model):
     _name = "user.hr"
     _inherits = {"res.users": 'user_id'}
+    _inherit = ['user.worker.info']
 
-    user_id = fields.Many2one("res.users")
+
+    user_id = fields.Many2one("res.users", required=True, ondelete="cascade")
 
     @api.model_create_multi
     def create(self, vals):

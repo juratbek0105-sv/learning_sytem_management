@@ -6,6 +6,7 @@ class Room(models.Model):
     _description = 'Room'
 
     name = fields.Char(required=True)
+    number = fields.Integer()
     active = fields.Boolean(default=True)
     capacity = fields.Integer(string="Capacity")
 

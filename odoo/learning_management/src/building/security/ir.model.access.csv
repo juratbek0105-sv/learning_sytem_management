@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_building_building,building.building,model_building_building,base.group_user,1,1,1,1
+access_building_building_user,access_building_building_user,model_building_building,base.group_user,1,1,1,1
+access_building_coworking_user,access_building_coworking_user,model_building_coworking,base.group_user,1,1,1,1
+access_building_floor_user,access_building_floor_user,model_building_floor,base.group_user,1,1,1,1
+access_building_room_user,access_building_room_user,model_building_room,base.group_user,1,1,1,1

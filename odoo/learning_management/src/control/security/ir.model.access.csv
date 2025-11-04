@@ -1,2 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_control_control,control.control,model_control_control,base.group_user,1,1,1,1
+access_control_attendance_user,access_control_attendance_user,model_control_attendance,base.group_user,1,1,1,1
+access_control_penalty_user,access_control_penalty_user,model_control_penalty,base.group_user,1,1,1,1
+access_control_warning_user,access_control_warning_user,model_control_warning,base.group_user,1,1,1,1
+access_control_work_hours_user,access_control_work_hours_user,model_control_work_hours,base.group_user,1,1,1,1
+access_control_work_places_user,access_control_work_places_user,model_control_work_places,base.group_user,1,1,1,1

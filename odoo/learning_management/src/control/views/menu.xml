@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>>
+<odoo>
+    <data>
+        <menuitem id="menu_control_root" string="Control">
+            <menuitem id="menu_attendance" action="action_attendance"/>
+            <menuitem id="menu_penalty" action="action_penalty"/>
+            <menuitem id="menu_warning" action="action_warning"/>
+            <menuitem id="menu_work_hours" action="action_work_hours"/>
+            <menuitem id="menu_work_hours" action="action_control_work_places"/>
+        </menuitem>
+    </data>
+</odoo>

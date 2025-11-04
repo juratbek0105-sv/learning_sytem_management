@@ -5,7 +5,7 @@ class Coworking(models.Model):
     _name = 'building.coworking'
     _description = 'Coworking'
 
-    name = fields.Char(string="Coworking Name", required=True)
+    name = fields.Char(string="Name", required=True)
     building_id = fields.Many2one("building.building", required=True)
     capacity = fields.Integer(string="Capacity")
     active = fields.Boolean(string="Active", default=True)

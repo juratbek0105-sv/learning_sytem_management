@@ -11,7 +11,7 @@ class Attendance(models.Model):
          ("employee", "Employee"),
      ], required=True)
 
-     student_id = fields.Many2one("lms.student", string="Student")
+     student_id = fields.Many2one("user.student", string="Student")
      employee_id = fields.Many2one("res.users", string="Employee")
 
      date = fields.Date()

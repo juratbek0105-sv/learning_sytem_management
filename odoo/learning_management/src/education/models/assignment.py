@@ -23,7 +23,7 @@ class Assignment(models.Model):
     course_id = fields.Many2one("edu.course", tracking=True)
     group_id = fields.Many2one("edu.group", tracking=True)
     subject_id = fields.Many2one("edu.subject", string="Subject", required=True, tracking=True)
-    student_ids = fields.Many2many("lms.student", string="Assigned Students", tracking=True)
+    student_ids = fields.Many2many("user.student", string="Assigned Students", tracking=True)
 
     result_ids = fields.One2many("edu.performance", "assignment_id")
 

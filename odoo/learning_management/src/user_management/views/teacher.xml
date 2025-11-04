@@ -19,9 +19,9 @@
             <form string="Teacher">
                 <sheet>
                     <group>
-                            <field name="user_id"/>
-                            <field name="gender"/>
-                            <field name="experience_year"/>
+                        <field name="user_id"/>
+                        <field name="gender"/>
+                        <field name="experience_year"/>
                     </group>
 
                     <notebook>

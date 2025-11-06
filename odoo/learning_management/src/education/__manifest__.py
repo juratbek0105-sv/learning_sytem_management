@@ -19,6 +19,9 @@
         'views/inherit_views/student_inherit.xml',
         'views/inherit_views/teacher_inherit.xml',
         'views/menu.xml',
+
+        'data/uom_data.xml',
+        'data/weekday_data.xml',
     ],
 }
 

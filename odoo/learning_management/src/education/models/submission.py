@@ -7,7 +7,7 @@ class EduHomeworkSubmission(models.Model):
 
     task_id = fields.Many2one("edu.task", string="Homework", required=True)
     student_id = fields.Many2one("user.student", string="Student", required=True)
-    submit_date = fields.Datetime(default=fields.Datetime.now)
+    submit_date = fields.Datetime(default=fields.Datetime.now, string="Submit Date")
     attachment = fields.Binary(string="Attachment")
     file_name = fields.Char(string="Filename")
     note = fields.Text(string="Comment")

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-\    <record id="view_edu_timetable_form_inherit_room" model="ir.ui.view">
+    \
+    <record id="view_edu_timetable_form_inherit_room" model="ir.ui.view">
         <field name="name">edu.timetable.form.inherit.room</field>
         <field name="model">edu.timetable</field>
         <field name="inherit_id" ref="education.view_timetable_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='group_id']" position="after">
                 <field name="room_id"/>
+                <field name="building_id"/>
             </xpath>
         </field>
     </record>
@@ -18,6 +20,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='group_id']" position="after">
                 <field name="room_id"/>
+                <field name="building_id"/>
+
             </xpath>
         </field>
     </record>

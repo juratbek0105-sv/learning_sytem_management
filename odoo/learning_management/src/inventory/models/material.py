@@ -15,7 +15,7 @@ class EduMaterials(models.Model):
     ], default='new')
 
 
-    branch_id = fields.Many2one('res.company',required=True)
+    company_id = fields.Many2one('res.company',required=True)
     responsible_id = fields.Many2one("res.users", string="Responsible Person")
 
     def action_material_broken(self):

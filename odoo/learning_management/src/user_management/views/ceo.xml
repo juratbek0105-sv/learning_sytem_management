@@ -9,7 +9,7 @@
                 <field name="email"/>
                 <field name="login"/>
                 <field name="phone"/>
-                <field name="user_id"/>
+                <field name="company_ids"/>
             </list>
         </field>
     </record>

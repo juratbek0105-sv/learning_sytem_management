@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- UOM Categories -->
+    <record id="education_category_time" model="uom.category">
+        <field name="name">Time</field>
+    </record>
+
+    <!-- UOM.UOM -->
+    <!-- Hours (reference unit) -->
+    <record id="education_uom_hour" model="uom.uom">
+        <field name="category_id" ref="education_category_time"/>
+        <field name="name">Hours</field>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
+
+    <!-- Minutes -->
+    <record id="education_uom_minute" model="uom.uom">
+        <field name="category_id" ref="education_category_time"/>
+        <field name="name">Minutes</field>
+        <field name="factor" eval="60.0"/>
+        <field name="uom_type">smaller</field>
+    </record>
+
+    <!-- Days -->
+    <record id="education_uom_day" model="uom.uom">
+        <field name="category_id" ref="education_category_time"/>
+        <field name="name">Days</field>
+        <field name="factor" eval="24.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
+
+    <!-- Weeks -->
+    <record id="education_uom_week" model="uom.uom">
+        <field name="category_id" ref="education_category_time"/>
+        <field name="name">Weeks</field>
+        <field name="factor" eval="168.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
+
+    <!-- Months -->
+    <record id="education_uom_month" model="uom.uom">
+        <field name="category_id" ref="education_category_time"/>
+        <field name="name">Months</field>
+        <field name="factor" eval="720.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
+
+</odoo>

@@ -21,12 +21,16 @@
                     <header>
                         <button name="action_toggle_subject" type="object"
                                 string="Activate" class="btn-primary"
-                                icon="fa-check" invisible="active"/>
+                                icon="fa-check"
+                                modifiers="{'invisible': [('active', '!=', False)]}"/>
+
                         <button name="action_toggle_subject" type="object"
                                 string="Deactivate" class="btn-secondary"
-                                icon="fa-ban" invisible="not active"/>
-                        <field name="active" widget="statusbar" statusbar_visible="active"/>
+                                icon="fa-ban"
+                                modifiers="{'invisible': [('active', '!=', True)]}"/>
+                        <field name="active" invisible="1"/>
                     </header>
+
 
                     <group>
                         <group>
@@ -34,8 +38,8 @@
                             <field name="code"/>
                         </group>
                         <group>
-                            <field name="teacher_ids" widget="many2many_tags"/>
-                            <field name="course_ids" widget="many2many_tags"/>
+                            <field name="teacher_ids"/>
+                            <field name="course_ids"/>
                         </group>
                     </group>
 

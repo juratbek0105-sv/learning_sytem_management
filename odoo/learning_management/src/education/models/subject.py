@@ -7,7 +7,7 @@ class Subject(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
 
-    name = fields.Char(string="Subject Name", required=True, tracking=True)
+    name = fields.Char(string="Name", required=True, tracking=True)
     code = fields.Char(string="Code")
     description = fields.Text(string="Description")
     active = fields.Boolean(string="Active", default=True, tracking=True)

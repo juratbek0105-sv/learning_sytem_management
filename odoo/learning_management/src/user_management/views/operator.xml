@@ -9,7 +9,6 @@
                 <field name="email"/>
                 <field name="login"/>
                 <field name="phone"/>
-                <field name="user_id"/>
             </list>
         </field>
     </record>
@@ -22,6 +21,7 @@
                 <sheet>
                     <group>
                         <field name="user_id"/>
+                        <field name="company_id"/>
                         <field name="gender"/>
                         <field name="experience_year"/>
                     </group>

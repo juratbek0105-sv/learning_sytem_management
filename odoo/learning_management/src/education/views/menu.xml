@@ -11,7 +11,7 @@
             <menuitem id="menu_subject" action="action_subject"/>
             <menuitem id="menu_submission" action="action_task_submission"/>
             <menuitem id="menu_task" action="action_task"/>
-            <menuitem id="menu_timetable" action="action_timetable"/>
+            <menuitem id="menu_edu_timetable" action="action_edu_timetable"/>
         </menuitem>
     </data>
 </odoo>

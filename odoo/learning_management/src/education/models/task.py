@@ -6,9 +6,10 @@ class Task(models.Model):
      _description = 'Task'
 
 
-     name = fields.Char(string="Assignment", required=True)
+     name = fields.Char(string="Name", required=True)
      description = fields.Text(string="Task Description")
      deadline = fields.Datetime(string="Deadline")
+
 
      course_id = fields.Many2one("edu.course")
      group_id = fields.Many2one("edu.group")

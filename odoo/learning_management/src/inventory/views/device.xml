@@ -8,7 +8,7 @@
                 <field name="name"/>
                 <field name="purchase_date"/>
                 <field name="purchase_cost"/>
-                <field name="branch_id"/>
+                <field name="company_id"/>
                 <field name="status"/>
             </list>
         </field>
@@ -34,7 +34,7 @@
                         <field name="name"/>
                         <field name="purchase_date"/>
                         <field name="purchase_cost"/>
-                        <field name="branch_id"/>
+                        <field name="company_id"/>
                         <field name="status"/>
                     </group>
                 </sheet>

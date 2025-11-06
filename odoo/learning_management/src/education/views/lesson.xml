@@ -10,7 +10,6 @@
                 <field name="duration"/>
                 <field name="course_id"/>
                 <field name="group_id"/>
-                <field name="subject_id"/>
                 <field name="teacher_id"/>
                 <field name="is_demo"/>
             </list>

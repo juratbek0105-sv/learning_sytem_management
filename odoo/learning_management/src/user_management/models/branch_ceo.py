@@ -9,7 +9,6 @@ class BranchCeo(models.Model):
 
 
     user_id = fields.Many2one("res.users", required=True, ondelete="cascade")
-    company_id = fields.Many2one('res.company', required=True)
 
     @api.model_create_multi
     def create(self, vals):

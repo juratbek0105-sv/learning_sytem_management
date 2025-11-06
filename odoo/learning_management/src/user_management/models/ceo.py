@@ -9,7 +9,7 @@ class CEO(models.Model):
 
 
     user_id = fields.Many2one("res.users", required=True, ondelete="cascade")
-    company_ids = fields.Many2one('res.company', required=True)
+    company_ids = fields.Many2one('res.company', required=True, string="Branches")
 
 
     @api.model_create_multi

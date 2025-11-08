@@ -15,7 +15,6 @@ class Lesson(models.Model):
      course_id = fields.Many2one("edu.course")
      group_id = fields.Many2one("edu.group")
      task_ids = fields.One2many("edu.task", "lesson_id")
-     subject_id = fields.Many2one("edu.subject")
      teacher_id = fields.Many2one("user.teacher")
 
 

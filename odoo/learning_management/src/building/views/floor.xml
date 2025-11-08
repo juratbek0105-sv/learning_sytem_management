@@ -4,12 +4,11 @@
         <field name="name">building.floor.list</field>
         <field name="model">building.floor</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="number"/>
-                <field name="active"/>
-                <field name="total_rooms"/>
-                <field name="building_id"/>
+            <list string="Floors" decoration-muted="not active">
+                <field name="number" string="Floor Number"/>
+                <field name="building_id" string="Building"/>
+                <field name="total_rooms" string="Total Rooms"/>
+                <field name="active" widget="boolean_toggle" string="Active"/>
             </list>
         </field>
     </record>
@@ -25,7 +24,6 @@
                         <button name="action_toggle_floor" string="Deactivate" type="object" class="btn-secondary"/>
                     </header>
                     <group>
-                        <field name="name"/>
                         <field name="number"/>
                         <field name="active"/>
                         <field name="total_rooms"/>
@@ -35,7 +33,6 @@
                         <page string="Rooms">
                             <field name="room_ids">
                                 <list>
-                                    <field name="name"/>
                                     <field name="capacity"/>
                                     <field name="building_id"/>
                                 </list>

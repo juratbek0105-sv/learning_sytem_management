@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_result_list" model="ir.ui.view">
+        <field name="name">edu.result.list</field>
+        <field name="model">edu.result</field>
+        <field name="arch" type="xml">
+            <list decoration-success="passed" decoration-danger="not passed">
+                <field name="student_id"/>
+                <field name="assignment_id"/>
+                <field name="submit_date"/>
+                <field name="score"/>
+                <field name="passed"/>
+                <field name="graded_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_result_form" model="ir.ui.view">
+        <field name="name">edu.result.form</field>
+        <field name="model">edu.result</field>
+        <field name="arch" type="xml">
+            <form class="oe_form">
+                <header>
+                    <button name="action_submit" type="object" string="Submit"  class="btn-primary"/>
+                    <button name="action_grade" type="object" string="Grade" class="btn-success"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,graded"/>
+                </header>
+
+                <sheet>
+                    <h1>
+                        <field name="student_id" class="oe_inline" placeholder="Select Student"/>
+                        <span>-</span>
+                        <field name="assignment_id" class="oe_inline" placeholder="Related Assignment"/>
+                    </h1>
+
+                    <group>
+                        <group string="Submission Details">
+                            <field name="submission_file" widget="binary"/>
+                            <field name="submit_date"/>
+                        </group>
+
+                        <group string="Grading Information">
+                            <field name="score"/>
+                            <field name="passed" readonly="1"/>
+                            <field name="graded_date"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Teacher Feedback">
+                            <field name="teacher_feedback" placeholder="Provide detailed feedback or comments..."/>
+                        </page>
+
+                        <page string="Assignment Details">
+                            <group>
+                                <field name="assignment_id">
+                                    <list>
+                                        <field name="exam_type"/>
+                                        <field name="exam_date"/>
+                                        <field name="max_score"/>
+                                        <field name="pass_score"/>
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_result" model="ir.actions.act_window">
+        <field name="name">Results</field>
+        <field name="res_model">edu.result</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_result_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_result_form')})
+        ]"/>
+    </record>
+</odoo>

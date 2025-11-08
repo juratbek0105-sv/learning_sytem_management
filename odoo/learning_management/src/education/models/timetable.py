@@ -15,11 +15,7 @@ class Timetable(models.Model):
         required=True,
         domain=lambda self: [('company_id', '=', self.env.company.id)]
     )
-    subject_id = fields.Many2one(
-        "edu.subject",
-        string="Subject",
-        tracking=True
-    )
+
     course_id = fields.Many2one('edu.course', string="Course", tracking=True)
     teacher_id = fields.Many2one('user.teacher',string="Teacher",required=True,tracking=True)
     company_id = fields.Many2one('res.company', string="Branch", default=lambda self: self.env.company, tracking=True)

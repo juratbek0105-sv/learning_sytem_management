@@ -10,7 +10,7 @@ class Timetable(models.Model):
 
 
 class EducationCourse(models.Model):
-    _inherit = 'education.course'
+    _inherit = 'edu.course'
 
     room_id = fields.Many2one('building.room', string="Classroom / Room")
     building_id = fields.Many2one('building.building', string="Building")

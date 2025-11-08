@@ -8,6 +8,8 @@ class Assignment(models.Model):
 
     name = fields.Char(string="Assignment", required=True)
     description = fields.Text(string="Description")
+    upload_file = fields.Binary(string="File")
+
     deadline = fields.Datetime(string="Deadline")
     max_score = fields.Float(default=100)
     pass_score = fields.Float("Pass  Score")
@@ -23,7 +25,22 @@ class Assignment(models.Model):
 
     course_id = fields.Many2one("edu.course", tracking=True)
     group_id = fields.Many2one("edu.group", tracking=True)
-    subject_id = fields.Many2one("edu.subject", string="Subject", required=True, tracking=True)
+    teacher_id = fields.Many2one("user.teacher", string="Assigned By", tracking=True)
     student_ids = fields.Many2many("user.student", string="Assigned Students", tracking=True)
+    result_ids = fields.One2many("edu.result", "assignment_id")
 
-    result_ids = fields.One2many("edu.performance", "assignment_id")
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('assigned', 'Assigned'),
+        ('submitted', 'Submitted'),
+        ('graded', 'Graded'),
+        ('closed', 'Closed'),
+    ], default='draft', tracking=True)
+
+
+
+    def action_close(self):
+        self.state = 'closed'
+
+    def action_reopen(self):
+        self.state = 'assigned'

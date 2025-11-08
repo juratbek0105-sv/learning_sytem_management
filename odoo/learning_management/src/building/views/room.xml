@@ -5,7 +5,6 @@
         <field name="model">building.room</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name"/>
                 <field name="number"/>
                 <field name="active"/>
                 <field name="capacity"/>
@@ -29,7 +28,6 @@
                     </header>
                     <group>
                         <group>
-                            <field name="name"/>
                             <field name="number"/>
                             <field name="active"/>
                             <field name="capacity"/>
@@ -37,6 +35,7 @@
                             <field name="status"/>
                         </group>
                         <group>
+                            <field name="building_id"/>
                             <field name="floor_id"/>
                             <field name="room_type"/>
                             <field name="status"/>

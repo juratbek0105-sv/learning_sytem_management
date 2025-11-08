@@ -2,7 +2,7 @@
 {
     'name': " LMS education",
 
-    'depends': ['user_management', 'mail'],
+    'depends': ['user_management', 'mail', 'uom'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -11,8 +11,7 @@
         'views/group.xml',
         'views/language.xml',
         'views/lesson.xml',
-        'views/performance.xml',
-        'views/subject.xml',
+        'views/result.xml',
         'views/submission.xml',
         'views/task.xml',
         'views/timetable.xml',

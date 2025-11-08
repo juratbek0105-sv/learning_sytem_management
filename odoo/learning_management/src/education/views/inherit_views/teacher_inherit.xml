@@ -10,13 +10,6 @@
                 <xpath expr="//notebook" position="inside">
                     <page string="Teaching Info">
                         <group>
-                            <field name="subjects">
-                                <list editable="bottom">
-                                    <field name="name"/>
-                                    <field name="code"/>
-                                </list>
-                            </field>
-
                             <field name="group_ids">
                                 <list editable="bottom">
                                     <field name="name"/>

@@ -6,12 +6,11 @@ class Room(models.Model):
     _name = 'building.room'
     _description = 'Room'
 
-    name = fields.Char(required=True)
     number = fields.Integer()
     active = fields.Boolean(default=True)
     capacity = fields.Integer(string="Capacity")
 
-    floor_id = fields.Many2one('building.floor', string="Floor")
+    floor_id = fields.Many2one('building.floor', string="Floor", domain="[('building_id', '=', building_id)]")
     building_id = fields.Many2one("building.building")
     is_under_repair = fields.Boolean(default=False)
 

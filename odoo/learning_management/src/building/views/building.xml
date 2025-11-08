@@ -8,7 +8,7 @@
                 <field name="name"/>
                 <field name="address"/>
                 <field name="active"/>
-                <field name="branch_id"/>
+                <field name="company_id"/>
             </list>
         </field>
     </record>
@@ -31,14 +31,13 @@
                         </group>
                         <group>
                             <field name="manager_id"/>
-                            <field name="branch_id"/>
+                            <field name="company_id"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Rooms">
                             <field name="room_ids">
                                 <list>
-                                    <field name="name"/>
                                     <field name="capacity"/>
                                     <field name="building_id"/>
                                 </list>
@@ -47,7 +46,6 @@
                         <page string="Floors">
                             <field name="floor_ids">
                                 <list>
-                                    <field name="name"/>
                                     <field name="number"/>
                                     <field name="total_rooms"/>
                                     <field name="building_id"/>

@@ -12,6 +12,5 @@ class Student(models.Model):
 class Teacher(models.Model):
     _inherit = "user.teacher"
 
-    subjects = fields.Many2many("edu.subject")
     group_ids = fields.Many2many("edu.group", string="Groups")
     course_ids = fields.Many2many("edu.course", string="Courses")

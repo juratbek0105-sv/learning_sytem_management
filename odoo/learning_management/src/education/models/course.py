@@ -12,13 +12,12 @@ class Course(models.Model):
     name = fields.Char(string="Name", required=True)
     description = fields.Html(string="Description")
     duration = fields.Float(required=True, string="Duration")
-    duration_uom = fields.Many2one("uom.uom", domain=[("category_id.name", "=", "Time")])
+    duration_uom_id = fields.Many2one("uom.uom", domain=[("category_id.name", "=", "Time")])
     price = fields.Float(required=True, string="Price")
     active = fields.Boolean(string="Active", default=True)
 
-    subject_ids = fields.Many2many("edu.subject")
     group_ids = fields.One2many("edu.group", "course_id")
-    teacher_ids = fields.Many2many("edu.teacher", tracking=True)
+    teacher_ids = fields.Many2many("user.teacher", tracking=True)
     student_ids = fields.Many2many("user.student", string="Students")
 
     @api.constrains('duration')

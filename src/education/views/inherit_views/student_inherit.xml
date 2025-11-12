@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_user_student_inherit_groups_courses" model="ir.ui.view">
+            <field name="name">user.student.inherit.groups.courses</field>
+            <field name="model">user.student</field>
+            <field name="inherit_id" ref="user_management.student_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Education Info">
+                        <group>
+                            <field name="group_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="state"/>
+                                    <field name="course_id"/>
+                                </list>
+                            </field>
+                            <field name="course_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="duration"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

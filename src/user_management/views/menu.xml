@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="menu_user_root" name="User Management">
+            <menuitem id="menu_student" action="action_student"/>
+            <menuitem id="menu_user_teacher" action="action_user_teacher"/>
+            <menuitem id="menu_user_hr" action="action_user_hr"/>
+            <menuitem id="menu_user_operator" action="action_user_operator"/>
+            <menuitem id="menu_user_ceo" action="action_user_ceo"/>
+            <menuitem id="menu_user_branch_ceo" action="action_user_branch_ceo"/>
+            <menuitem id="menu_user_work_places" action="action_work_places"/>
+        </menuitem>
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_user_branch_ceo_list" model="ir.ui.view">
+        <field name="name">user.branch.ceo.list</field>
+        <field name="model">user.branch.ceo</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="login"/>
+                <field name="phone"/>
+                <field name="company_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_user_branch_ceo_form" model="ir.ui.view">
+        <field name="name">user.branch.ceo.form</field>
+        <field name="model">user.branch.ceo</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="gender"/>
+                        <field name="company_id"/>
+                        <field name="experience_year"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Work Places">
+                            <field name="work_place_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="worked_years"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_user_branch_ceo" model="ir.actions.act_window">
+        <field name="name">Branch CEOs</field>
+        <field name="res_model">user.branch.ceo</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_user_branch_ceo_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_user_branch_ceo_form')})
+        ]"/>
+
+    </record>
+</odoo>

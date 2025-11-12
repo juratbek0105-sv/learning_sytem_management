@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inventory_device_user,access_inventory_device_user,model_inventory_device,base.group_user,1,1,1,1
+access_inventory_needs_user,access_inventory_needs_user,model_inventory_needs,base.group_user,1,1,1,1
+access_inventory_edu_materials_user,access_inventory_edu_materials_user,model_inventory_edu_materials,base.group_user,1,1,1,1

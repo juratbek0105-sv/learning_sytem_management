@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_costs_list" model="ir.ui.view">
+        <field name="name">payment.costs.list</field>
+        <field name="model">payment.costs</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="amount"/>
+                <field name="responsible_id"/>
+                <field name="active"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cost_form" model="ir.ui.view">
+        <field name="name">payment.cost.form</field>
+        <field name="model">payment.cost</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="action_approve" type="object" string="Approve"/>
+                        <button name="action_paid" type="object" string="Mark as paid"/>
+                        <button name="action_toggle_course" type="object"
+                                string="Activate" modifiers="{'invisible': [('active', '=', False)]}"
+                                class="btn-primary" icon="fa-refresh"/>
+                        <button name="action_toggle_course" type="object"
+                                string="Deactivate" modifiers="{'invisible': [('active', '=', False)]}"
+                                class="btn-primary" icon="fa-refresh"/>
+                        <field name="active" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="amount"/>
+                        <field name="responsible_id"/>
+                        <field name="active"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_costs" model="ir.actions.act_window">
+        <field name="name">Costs</field>
+        <field name="res_model">payment.costs</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_costs_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_cost_form')})
+        ]"/>
+    </record>
+</odoo>

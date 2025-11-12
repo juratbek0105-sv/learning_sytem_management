@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_accountant_user_management,access_user_accountant_user_management,model_user_accountant,base.group_user,1,1,1,1
+access_user_ceo_user_management,access_user_ceo_user_management,model_user_ceo,base.group_user,1,1,1,1
+access_user_branch_ceo_user_management,access_user_branch_ceo_user_management,model_user_branch_ceo,base.group_user,1,1,1,1
+access_user_hr_user_management,access_user_hr_user_management,model_user_hr,base.group_user,1,1,1,1
+access_user_operator_user_management,access_user_operator_user_management,model_user_operator,base.group_user,1,1,1,1
+access_user_student_user_management,access_user_student_user_management,model_user_student,base.group_user,1,1,1,1
+access_user_teacher_user_management,access_user_teacher_user_management,model_user_teacher,base.group_user,1,1,1,1

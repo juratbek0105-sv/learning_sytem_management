@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_edu_schedule_lesson_form" model="ir.ui.view">
+            <field name="name">edu.schedule.lesson.form</field>
+            <field name="model">edu.schedule.lesson</field>
+            <field name="arch" type="xml">
+                <form string="Lesson Schedule">
+                    <header>
+                        <button name="action_change_lesson_date"
+                                type="object"
+                                string="Change Lesson Date"
+                                class="btn-primary"
+                                icon="fa-calendar"/>
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="timetable_id"/>
+                            <field name="lesson_date"/>
+                            <field name="lesson_start_time"/>
+                            <field name="lesson_end_time"/>
+                            <field name="teacher_id"/>
+                            <field name="course_id"/>
+                            <field name="group_id" context="{'default_course_id': course_id}"
+                                   domain="[('course_id','=',course_id)]"
+                                   on_change="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_edu_schedule_lesson_list" model="ir.ui.view">
+            <field name="name">edu.schedule.lesson.list</field>
+            <field name="model">edu.schedule.lesson</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="timetable_id"/>
+                    <field name="lesson_date"/>
+                    <field name="lesson_start_time"/>
+                    <field name="lesson_end_time"/>
+                    <field name="teacher_id"/>
+                    <field name="group_id"/>
+                    <field name="course_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_schedule_lesson" model="ir.actions.act_window">
+            <field name="name">Schedule Lesson</field>
+            <field name="res_model">edu.schedule.lesson</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_edu_schedule_lesson_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_edu_schedule_lesson_form')})
+        ]"/>
+        </record>
+
+    </data>
+</odoo>

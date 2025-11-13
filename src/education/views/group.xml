@@ -18,28 +18,31 @@
         <field name="model">edu.group</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_toggle_group"
+                            type="object"
+                            string="Deactivate"
+                            class="btn-primary"
+                            icon="fa-toggle-off"
+                            invisible="not active"/>
+
+                    <button name="action_toggle_group"
+                            type="object"
+                            string="Activate"
+                            class="btn-secondary"
+                            icon="fa-toggle-on"
+                            invisible="active"/>
+                    <button name="action_create_timetable"
+                            string="Create Timetable"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-calendar"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="active,frozen,completed"/>
+                </header>
                 <sheet>
-                    <header>
-                        <button name="action_toggle_group"
-                                type="object"
-                                string="Deactivate"
-                                class="btn-primary"
-                                icon="fa-toggle-off"
-                                modifiers="{'invisible': [('active', '=', False)]}"/>
-
-                        <button name="action_toggle_group"
-                                type="object"
-                                string="Activate"
-                                class="btn-secondary"
-                                icon="fa-toggle-on"
-                                modifiers="{'invisible': [('active', '=', True)]}"/>
-
-                        <field name="state" widget="statusbar" statusbar_visible="active,frozen,completed"/>
-                    </header>
-
                     <group>
                         <group>
-                            <field name="name"/>
                             <field name="course_id"/>
                             <field name="teacher_ids" widget="many2many_tags"/>
                         </group>
@@ -50,13 +53,24 @@
                     </group>
 
                     <notebook>
-                        <page string="Timetable">
-                            <field name="timetable_id" context="{'default_group_id': id}"/>
+                        <page string="Timetables">
+                            <field name="timetable_id" create="0"/>
                         </page>
 
                         <page string="Lessons">
-                            <field name="lesson_ids" context="{'default_group_id': id}"/>
+                            <field name="lesson_ids" context="{
+                                    'default_group_id': id,
+                                    'default_course_id': course_id,}">
+                                <list editable="bottom">
+                                    <field name="teacher_id"/>
+                                    <field name="date"/>
+                                    <field name="duration"/>
+                                    <field name="duration_uom"/>
+                                    <field name="is_demo"/>
+                                </list>
+                            </field>
                         </page>
+
                     </notebook>
                 </sheet>
             </form>

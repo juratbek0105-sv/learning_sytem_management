@@ -18,17 +18,17 @@
         <field name="model">edu.course</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_toggle_course" type="object"
+                            string="Activate" invisible="not active"
+                            class="btn-primary" icon="fa-refresh"/>
+
+                    <button name="action_toggle_course" type="object"
+                            string="Deactivate" invisible="active"
+                            class="btn-primary" icon="fa-refresh"/>
+                    <button name="action_create_group" type="object" string="Create Group"/>
+                </header>
                 <sheet>
-                    <header>
-                        <button name="action_toggle_course" type="object"
-                                string="Activate" invisible="active"
-                                class="btn-primary" icon="fa-refresh"/>
-
-                        <button name="action_toggle_course" type="object"
-                                string="Deactivate" invisible="not active"
-                                class="btn-primary" icon="fa-refresh"/>
-                    </header>
-
                     <group>
                         <group>
                             <field name="name"/>
@@ -36,6 +36,7 @@
                             <field name="duration_uom_id" modifiers="{'required': [('duration', '!=', 0)]}"/>
                         </group>
                         <group>
+                            <field name="active"/>
                             <field name="price" widget="monetary"/>
                             <field name="teacher_ids" widget="many2many_tags"/>
                         </group>
@@ -43,11 +44,16 @@
 
                     <notebook>
                         <page string="Description">
-                            <field name="description" nolabel="1"/>
+                            <field name="description" nolabel="1" placeholder="Description"/>
                         </page>
 
                         <page string="Groups">
-                            <field name="group_ids"/>
+                            <field name="group_ids">
+                                <list editable="bottom">
+                                    <field name="state"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>

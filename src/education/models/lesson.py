@@ -17,6 +17,12 @@ class Lesson(models.Model):
      task_ids = fields.One2many("edu.task", "lesson_id")
      teacher_id = fields.Many2one("user.teacher")
 
+     schedule_lesson_ids = fields.One2many(
+         "edu.schedule.lesson",
+         "lesson_id",
+         string="Scheduled Lessons",
+     )
+
 
 
 

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_edu_payment_user,access_payment_edu_payment_user,model_payment_edu_payment,base.group_user,1,1,1,1
+access_payment_costs_user,access_payment_costs_user,model_payment_costs,base.group_user,1,1,1,1
+access_payment_kpi_user,access_payment_kpi_user,model_payment_kpi,base.group_user,1,1,1,1
+access_payment_coupon_user,access_payment_coupon_user,model_payment_coupon,base.group_user,1,1,1,1
+access_payment_salary_user,access_payment_salary_user,model_payment_salary,base.group_user,1,1,1,1

@@ -1,64 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="view_edu_timetable_form" model="ir.ui.view">
         <field name="name">edu.timetable.form</field>
         <field name="model">edu.timetable</field>
         <field name="arch" type="xml">
             <form string="Timetable" version="7.0">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,active,done,cancel"
+                           statusbar_colors="{'draft': 'muted', 'active': 'blue', 'done': 'green', 'cancel': 'red'}"/>
+
+                    <button name="action_activate" string="Activate"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_done" string="Mark as Done"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'active'"/>
+
+                    <button name="action_cancel" string="Cancel"
+                            type="object" class="btn-danger"
+                            invisible="state == 'cancel'"/>
+
+                    <button name="action_view_schedule_lessons"
+                            string="View Lessons"
+                            type="object" icon="fa-calendar"
+                            class="oe_stat_button"/>
+                </header>
+
                 <sheet>
-                    <header>
-                        <field name="state" invisible="1"/>
-                        <button string="Set Active" type="object" name="action_activate"
-                                modifiers="{'invisible': [('state', '!=', 'draft')]}" class="btn-primary"/>
-                        <button string="Mark Done" type="object" name="action_done"
-                                modifiers="{'invisible': [('state', '!=', 'active')]}" class="oe_highlight"/>
-                        <button string="Cancel" type="object" name="action_cancel"
-                                modifiers="{'invisible': [('state', '=', 'cancel')]}" class="oe_highlight"/>
-                    </header>
                     <group>
-                        <field name="name"/>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,active,done,cancel"/>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="course_id"/>
+                            <field name="group_id"
+                                   context="{'default_course_id': course_id}"
+                                   domain="[('course_id','=',course_id)]"
+                                   on_change="1"/>
+                            <field name="teacher_id"/>
+                        </group>
+                        <group>
+                            <field name="state" readonly="1"/>
+                            <field name="notes" placeholder="Notes about this timetable..."/>
+                        </group>
                     </group>
 
                     <notebook>
-                        <page string="General">
+                        <!-- General -->
+                        <page string="General Info">
                             <group>
-                                <field name="company_id"/>
-                                <field name="group_id" options="{'no_create': False}"/>
-                            </group>
-                            <group>
-                                <field name="course_id"/>
-                                <field name="teacher_id"/>
+                                <group>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="lesson_start_time" widget="float_time"/>
+                                    <field name="lesson_end_time" widget="float_time"/>
+                                </group>
+                                <group>
+                                    <field name="weekday_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                    <field name="lesson_duration" readonly="1"/>
+                                    <field name="total_lessons" readonly="1"/>
+                                    <field name="total_duration" readonly="1"/>
+                                </group>
                             </group>
                         </page>
 
-                        <page string="Schedule">
+                        <!-- Lesson Dates -->
+                        <page string="Lesson Dates">
                             <group>
-                                <field name="start_date"/>
-                                <field name="end_date"/>
-                            </group>
-                            <group>
-                                <field name="weekday_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                            </group>
-                            <group>
-                                <field name="lesson_start_time" widget="float_time"/>
-                                <field name="lesson_end_time" widget="float_time"/>
-                                <field name="lesson_duration" readonly="1"/>
-                            </group>
-
-                            <group col="2">
-                                <field name="first_lesson_date" readonly="1"/>
-                                <field name="last_lesson_date" readonly="1"/>
-                            </group>
-                            <group>
-                                <field name="total_lessons" readonly="1"/>
-                                <field name="total_duration" readonly="1"/>
+                                <group>
+                                    <field name="first_lesson_date" readonly="1"/>
+                                    <field name="last_lesson_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <button name="action_view_schedule_lessons"
+                                            string="View Scheduled Lessons"
+                                            type="object"
+                                            icon="fa-calendar"
+                                            class="btn-outline-primary"/>
+                                </group>
                             </group>
                         </page>
 
+                        <!-- Notes -->
                         <page string="Notes / Activity">
-                            <field name="notes"/>
+                            <field name="notes" nolabel="1"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -70,9 +95,8 @@
         <field name="name">edu.timetable.list</field>
         <field name="model">edu.timetable</field>
         <field name="arch" type="xml">
-            <list string="Timetables">
+            <list string="Timetables" decoration-muted="state == 'cancel'" decoration-success="state == 'done'">
                 <field name="name"/>
-                <field name="company_id"/>
                 <field name="group_id"/>
                 <field name="course_id"/>
                 <field name="teacher_id"/>
@@ -85,6 +109,7 @@
         </field>
     </record>
 
+    <!-- CALENDAR VIEW -->
     <record id="view_edu_timetable_calendar" model="ir.ui.view">
         <field name="name">edu.timetable.calendar</field>
         <field name="model">edu.timetable</field>
@@ -92,25 +117,21 @@
             <calendar string="Timetable Calendar"
                       date_start="start_date"
                       date_stop="end_date"
-                      color="group_id">
+                      color="teacher_id">
                 <field name="name"/>
                 <field name="teacher_id"/>
             </calendar>
         </field>
     </record>
 
+    <!-- ACTION -->
     <record id="action_edu_timetable" model="ir.actions.act_window">
         <field name="name">Timetables</field>
         <field name="res_model">edu.timetable</field>
-        <field name="view_mode">form,list,calendar</field>
+        <field name="view_mode">list,form,calendar</field>
         <field name="view_ids" eval="[(5, 0, 0),
-                (0, 0, {'view_mode': 'list', 'view_id': ref('view_edu_timetable_list')}),
-                (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_edu_timetable_calendar')}),
-                (0, 0, {'view_mode': 'form', 'view_id': ref('view_edu_timetable_form')})]"/>
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_edu_timetable_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_edu_timetable_form')}),
+            (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_edu_timetable_calendar')})]"/>
     </record>
-
 </odoo>
-
-
-
-

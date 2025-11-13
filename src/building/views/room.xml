@@ -23,8 +23,10 @@
             <form>
                 <sheet>
                     <header>
-                        <button name="action_toggle_room" string="Activate" type="object" class="btn-primary"/>
-                        <button name="action_toggle_room" string="Deactivate" type="object" class="btn-secondary"/>
+                        <button name="action_toggle_room" string="Activate" type="object"
+                                invisible="active" class="btn-primary"/>
+                        <button name="action_toggle_room" string="Deactivate" type="object"
+                                invisible="not active" class="btn-secondary"/>
                     </header>
                     <group>
                         <group>

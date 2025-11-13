@@ -20,26 +20,27 @@
         <field name="model">edu.task</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_assign" type="object"
+                            string="Assign" class="btn-primary"
+                            icon="fa-send"
+                            invisible="state != 'draft'"/>
+                    <button name="action_close" type="object"
+                            string="Close Task" class="btn-secondary"
+                            icon="fa-lock"
+                            invisible="state in ('closed', 'draft')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,assigned,submitted,reviewed,closed"/>
+                </header>
                 <sheet>
-                    <header>
-                        <button name="action_assign" type="object"
-                                string="Assign" class="btn-primary"
-                                icon="fa-send"
-                                modifiers="{'invisible': [('state', '!=', 'draft')]}"/>
-                        <button name="action_close" type="object"
-                                string="Close Task" class="btn-secondary"
-                                icon="fa-lock"
-                                modifiers="{'invisible': [('state', 'in', ('closed', 'draft'))]}"/>
-                        <field name="state" widget="statusbar"
-                               statusbar_visible="draft,assigned,submitted,reviewed,closed"/>
-                    </header>
-
                     <group>
                         <group>
                             <field name="name"/>
                             <field name="deadline"/>
                             <field name="course_id"/>
-                            <field name="group_id"/>
+                            <field name="group_id" context="{'default_course_id': course_id}"
+                                   domain="[('course_id','=',course_id)]"
+                                   on_change="1"/>
                             <field name="lesson_id"/>
                         </group>
                         <group>

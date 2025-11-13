@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-        <record id="education_category_time" model="uom.category">
-            <field name="name">Time</field>
-        </record>
+<odoo noupdate="1">
+    <record id="uom_category_time" model="uom.category">
+        <field name="name">Time</field>
+    </record>
 
-        <record id="education_uom_minute" model="uom.uom">
-            <field name="category_id" ref="education_category_time"/>
-            <field name="name">Minutes</field>
-            <field name="factor" eval="1"/>
-            <field name="uom_type">reference</field>
-        </record>
+    <record id="product_uom_hour" model="uom.uom">
+        <field name="name">Hours</field>
+        <field name="category_id" ref="uom_category_time"/>
+        <field name="factor" eval="1.0"/>
+        <field name="uom_type">reference</field>
+    </record>
 
-        <record id="education_uom_hour" model="uom.uom">
-            <field name="category_id" ref="education_category_time"/>
-            <field name="name">Hours</field>
-            <field name="factor" eval="60"/>
-            <field name="uom_type">smaller</field>
-        </record>
+    <record id="product_uom_minute" model="uom.uom">
+        <field name="name">Minutes</field>
+        <field name="category_id" ref="uom_category_time"/>
+        <field name="factor" eval="1/60.0"/>
+        <field name="uom_type">smaller</field>
+    </record>
 
-        <record id="education_uom_day" model="uom.uom">
-            <field name="category_id" ref="education_category_time"/>
-            <field name="name">Days</field>
-            <field name="factor" eval="1440"/>
-            <field name="uom_type">smaller</field>
-        </record>
+    <record id="product_uom_day" model="uom.uom">
+        <field name="name">Days</field>
+        <field name="category_id" ref="uom_category_time"/>
+        <field name="factor" eval="8.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
 
-        <record id="education_uom_week" model="uom.uom">
-            <field name="category_id" ref="education_category_time"/>
-            <field name="name">Weeks</field>
-            <field name="factor" eval="10080"/>
-            <field name="uom_type">smaller</field>
-        </record>
+    <record id="product_uom_week" model="uom.uom">
+        <field name="name">Weeks</field>
+        <field name="category_id" ref="uom_category_time"/>
+        <field name="factor" eval="40.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
 
-        <record id="education_uom_month" model="uom.uom">
-            <field name="category_id" ref="education_category_time"/>
-            <field name="name">Months</field>
-            <field name="factor" eval="43200"/>
-            <field name="uom_type">smaller</field>
-        </record>
-    </data>
+    <record id="product_uom_month" model="uom.uom">
+        <field name="name">Months</field>
+        <field name="category_id" ref="uom_category_time"/>
+        <field name="factor" eval="160.0"/>
+        <field name="uom_type">bigger</field>
+    </record>
 </odoo>

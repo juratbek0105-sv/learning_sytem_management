@@ -1,16 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
         <menuitem id="menu_education_root" name="Education">
-            <menuitem id="menu_course" action="action_course"/>
-            <menuitem id="menu_group" action="action_group"/>
-            <menuitem id="menu_lesson" action="action_lesson"/>
-            <menuitem id="menu_assignment" action="action_assignment"/>
-            <menuitem id="menu_result" action="action_result"/>
-            <menuitem id="menu_task" action="action_task"/>
-            <menuitem id="menu_submission" action="action_task_submission"/>
-            <menuitem id="menu_edu_timetable" action="action_edu_timetable"/>
-            <menuitem id="menu_edu_language" action="action_edu_language"/>
+            <menuitem id="menu_education_course_root" name="Courses" >
+                <menuitem id="menu_course" name="Manage Courses" action="action_course"/>
+                <menuitem id="menu_group" name="Manage Groups" action="action_group"/>
+            </menuitem>
+            <menuitem id="menu_education_lesson_root" name="Lessons and Timetable">
+                <menuitem id="menu_lesson" name="Lessons" action="action_lesson"/>
+                <menuitem id="menu_schedule_lesson" name="Schedule Lessons"  action="action_schedule_lesson"/>
+                <menuitem id="menu_edu_timetable_manage" name="Timetable" action="action_edu_timetable"/>
+            </menuitem>
+            <menuitem id="menu_education_assignment_root" name="Assignments">
+                <menuitem id="menu_assignment" name="Assignments" action="action_assignment"/>
+                <menuitem id="menu_task" name="Tasks" action="action_task"/>
+                <menuitem id="menu_submission" name="Submissions" action="action_task_submission"/>
+                <menuitem id="menu_result" name="Results" action="action_result"/>
+            </menuitem>
+            <menuitem id="menu_education_settings_root" name="Settings">
+                <menuitem id="menu_edu_language" name="Languages" action="action_edu_language"/>
+            </menuitem>
         </menuitem>
     </data>
 </odoo>

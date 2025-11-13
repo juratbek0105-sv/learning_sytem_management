@@ -19,22 +19,21 @@
         <field name="model">edu.task.submission</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_review" type="object"
+                            string="Mark as Reviewed"
+                            class="btn-success"
+                            icon="fa-check"
+                            modifiers="{'invisible': [('state', '=', 'reviewed')]}"/>
+                    <button name="action_return" type="object"
+                            string="Return"
+                            class="btn-secondary"
+                            icon="fa-undo"
+                            modifiers="{'invisible': [('state', '=', 'returned')]}"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="submitted,reviewed,returned"/>
+                </header>
                 <sheet>
-                    <header>
-                        <button name="action_review" type="object"
-                                string="Mark as Reviewed"
-                                class="btn-success"
-                                icon="fa-check"
-                                modifiers="{'invisible': [('state', '=', 'reviewed')]}"/>
-                        <button name="action_return" type="object"
-                                string="Return"
-                                class="btn-secondary"
-                                icon="fa-undo"
-                                modifiers="{'invisible': [('state', '=', 'returned')]}"/>
-                        <field name="state" widget="statusbar"
-                               statusbar_visible="submitted,reviewed,returned"/>
-                    </header>
-
                     <group>
                         <group>
                             <field name="task_id"/>

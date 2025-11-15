@@ -7,7 +7,9 @@
             <list>
                 <field name="name"/>
                 <field name="duration"/>
+                <field name="duration_uom"/>
                 <field name="price"/>
+                <field name="total_lessons"/>
                 <field name="active"/>
             </list>
         </field>
@@ -19,21 +21,26 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_toggle_course" type="object"
-                            string="Activate" invisible="not active"
-                            class="btn-primary" icon="fa-refresh"/>
+                    <button name="action_open_course" type="object"
+                            string="Open" invisible="state == 'open'"
+                            class="btn-primary" icon="fa-chevron-down"/>
 
-                    <button name="action_toggle_course" type="object"
-                            string="Deactivate" invisible="active"
+                    <button name="action_close_course" type="object"
+                            string="Close" invisible="state == 'closed'"
+                            class="btn-primary" icon="fa-chevron-up"/>
+                    <button name="action_reset_draft_course" type="object"
+                            string="Reset to draft" invisible="state != 'closed'"
                             class="btn-primary" icon="fa-refresh"/>
                     <button name="action_create_group" type="object" string="Create Group"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="total_lessons"/>
                             <field name="duration"/>
-                            <field name="duration_uom_id" modifiers="{'required': [('duration', '!=', 0)]}"/>
+                            <field name="duration_uom" required="duration != 0"/>
                         </group>
                         <group>
                             <field name="active"/>
@@ -43,10 +50,28 @@
                     </group>
 
                     <notebook>
-                        <page string="Description">
-                            <field name="description" nolabel="1" placeholder="Description"/>
+                        <page string="Lessons">
+                            <field name="lesson_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="sequence"/>
+                                    <field name="duration"/>
+                                    <field name="duration_uom"/>
+                                    <field name="group_id"/>
+                                </list>
+                            </field>
                         </page>
-
+                        <page string="Default Lessons">
+                            <field name="course_lesson_ids">
+                                <list create="0">
+                                    <field name="name"/>
+                                    <field name="sequence"/>
+                                    <field name="duration"/>
+                                    <field name="duration_uom"/>
+                                </list>
+                            </field>
+                        </page>
                         <page string="Groups">
                             <field name="group_ids">
                                 <list editable="bottom">

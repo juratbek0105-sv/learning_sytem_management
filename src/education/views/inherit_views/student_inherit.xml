@@ -20,7 +20,7 @@
                             <field name="course_ids">
                                 <list editable="bottom">
                                     <field name="name"/>
-                                    <field name="duration"/>
+                                    <field name="total_lessons"/>
                                 </list>
                             </field>
                         </group>

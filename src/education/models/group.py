@@ -1,45 +1,73 @@
 from datetime import date
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class Group(models.Model):
     _name = 'edu.group'
-    _description = 'Group'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _description = 'Student Group / Class'
 
-    name = fields.Char(required=True, string="Name", tracking=True)
+    name = fields.Char(string='Group Name', required=True)
     active = fields.Boolean(default=True, string="Active")
     state = fields.Selection([
+        ('draft', 'Draft'),
         ('active', 'Active'),
         ('frozen', 'Frozen'),
         ('completed', 'Completed')
-    ], default='active', string="State")
+    ], default='draft', string="State")
 
-    course_id = fields.Many2one("edu.course")
+    course_id = fields.Many2one('edu.course', string='Course', required=True)
+    teacher_id = fields.Many2one('user.teacher', string='Teacher')
+    lesson_ids = fields.One2many('edu.lesson', 'group_id', string='Lessons')
+    lesson_count = fields.Integer(string="Lessons", compute="_compute_lesson_count")
     student_ids = fields.Many2many("user.student", string="Students")
-    teacher_ids = fields.Many2many("user.teacher")
-    timetable_id = fields.One2many("edu.timetable", "group_id", string="Timetable")
-    lesson_ids = fields.One2many("edu.lesson", "group_id")
-    company_id = fields.Many2one('res.company', string="Branch", default=lambda self: self.env.company)
+    student_count = fields.Integer(string="Students", compute="_compute_student_count")
+    schedule_table_ids = fields.One2many('edu.schedule.table', 'group_id', string=  'Timetables')
+    schedule_table_count = fields.Integer(string="Schedule Tables", compute="_compute_schedule_table_count")
+    company_id = fields.Many2one("res.company", string="Branch")
 
-    # Optional: store the year if you want to use it in naming
-    year = fields.Integer(default=lambda self: date.today().year, string="Year")
-
-    def action_toggle_group(self):
+    def _compute_lesson_count(self):
         for record in self:
-            record.active = not record.active
+            record.lesson_count = len(record.lesson_ids)
 
-    def action_create_timetable(self):
+    def _compute_student_count(self):
+        for record in self:
+            record.student_count = len(record.student_ids)
+
+    def _compute_schedule_table_count(self):
+        for record in self:
+            record.schedule_table_count = len(record.schedule_table_ids)
+
+    def action_reset_draft(self):
+        self.state = 'draft'
+
+    def action_set_active(self):
+        self.state = 'active'
+
+    def action_set_frozen(self):
+        self.state = 'frozen'
+
+    def action_set_completed(self):
+        self.state = 'completed'
+
+    def action_view_group_lessons(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Group Lessons'),
+            'res_model': 'edu.lesson',
+            'view_mode': 'list,form',
+            'domain': [('group_id', '=', self.id)],
+        }
+
+    def action_create_schedule_table(self):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Create Timetable',
-            'res_model': 'edu.timetable',
+            'name': 'Create Schedule Table',
+            'res_model': 'edu.schedule.table',
             'view_mode': 'form',
             'context': {
                 'default_group_id': self.id,
-                'default_course_id': self.course_id.id if self.course_id else False,
-                'default_teacher_ids': self.teacher_ids.ids,
+                'default_teacher_id': self.teacher_id.id,
                 'default_company_id': self.company_id.id if self.company_id else False,
             },
             'target': 'current',
@@ -48,24 +76,34 @@ class Group(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            vals['active'] = True
-            if 'course_id' in vals:
-                course = self.env['edu.course'].browse(vals['course_id'])
-                year = vals.get('year', date.today().year)
+            year = vals.get('year', date.today().year)
+            self = self.with_context(year=year)
 
-                existing_groups = self.search([
-                    ('course_id', '=', course.id),
-                    ('year', '=', year)
-                ], order='id asc')
+            if vals.get('name', '/') == '/':
+                vals['name'] = self.env['ir.sequence'].next_by_code('edu.group.sequence')
 
-                sequence = 1
-                if existing_groups:
-                    last_group = existing_groups[-1]
-                    try:
-                        sequence = int(last_group.name.split('-')[-1]) + 1
-                    except:
-                        sequence = len(existing_groups) + 1
+        groups = super(Group, self).create(vals_list)
 
-                vals['name'] = f"{course.name}{year}-{sequence}"
+        for group in groups:
+            group.copy_course_lessons()
 
-        return super(Group, self).create(vals_list)
+        return groups
+
+    def copy_course_lessons(self):
+        for group in self:
+            if not group.course_id.course_lesson_ids:
+                continue
+            lessons_to_add = []
+            for template_lesson in group.course_id.course_lesson_ids:
+                lessons_to_add.append((0, 0, {
+                    'name': template_lesson.name,
+                    'sequence': template_lesson.sequence,
+                    'duration': template_lesson.duration,
+                    'duration_uom': template_lesson.duration_uom.id if template_lesson.duration_uom else False,
+                    'course_id': group.course_id.id,
+                    'group_id': group.id,
+                    'teacher_id': group.teacher_id.id,
+                }))
+
+            group.write({'lesson_ids': lessons_to_add})
+

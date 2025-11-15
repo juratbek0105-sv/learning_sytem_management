@@ -6,10 +6,10 @@
                 <menuitem id="menu_course" name="Manage Courses" action="action_course"/>
                 <menuitem id="menu_group" name="Manage Groups" action="action_group"/>
             </menuitem>
-            <menuitem id="menu_education_lesson_root" name="Lessons and Timetable">
+            <menuitem id="menu_education_lesson_root" name="Lessons and Schedule table">
                 <menuitem id="menu_lesson" name="Lessons" action="action_lesson"/>
                 <menuitem id="menu_schedule_lesson" name="Schedule Lessons"  action="action_schedule_lesson"/>
-                <menuitem id="menu_edu_timetable_manage" name="Timetable" action="action_edu_timetable"/>
+                <menuitem id="menu_edu_timetable"  action="action_schedule_table"/>
             </menuitem>
             <menuitem id="menu_education_assignment_root" name="Assignments">
                 <menuitem id="menu_assignment" name="Assignments" action="action_assignment"/>

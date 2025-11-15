@@ -8,3 +8,4 @@
     <record id="weekday_saturday" model="edu.weekday"><field name="name">Saturday</field><field name="sequence">6</field></record>
     <record id="weekday_sunday" model="edu.weekday"><field name="name">Sunday</field><field name="sequence">7</field></record>
 </odoo>
+

@@ -7,7 +7,7 @@ class LessonDateWizard(models.TransientModel):
     _name = 'edu.lesson.date.wizard'
     _description = 'Change Lesson Date Wizard'
 
-    lesson_id = fields.Many2one('edu.schedule.lesson', string='Lesson', required=True)
+    lesson_id = fields.Many2one('edu.lesson', string='Lesson', required=True)
     option = fields.Selection([
         ('manual', 'Select Specific Date'),
         ('auto', 'Set Date After Last Lesson'),
@@ -22,26 +22,26 @@ class LessonDateWizard(models.TransientModel):
         if self.option == 'manual':
             if not self.new_date:
                 raise UserError(_("Please select a new date."))
-            lesson.lesson_date = self.new_date
+            lesson.date = self.new_date
 
         elif self.option == 'auto':
             # get all lessons of the timetable
-            timetable = lesson.timetable_id
-            lessons = self.env['edu.schedule.lesson'].search([
-                ('timetable_id', '=', timetable.id)
-            ], order='lesson_date desc')
+            schedule_table = lesson.group_id.schedule_table_ids
+            lessons = self.env['edu.lesson'].search([
+                ('schedule_table_ids', '=', schedule_table.id)
+            ], order='date desc')
 
             if not lessons:
                 raise UserError(_("No previous lessons found in this timetable."))
 
-            last_lesson_date = lessons[0].lesson_date
-            weekdays = timetable.weekday_ids.mapped('sequence')  # e.g., 1=Mon, 2=Tue, ...
+            last_lesson_date = lessons[0].date
+            weekdays = schedule_table.weekday_ids.mapped('sequence')  # e.g., 1=Mon, 2=Tue, ...
 
             # find the next date after last lesson that matches timetable weekdays
             next_date = last_lesson_date + timedelta(days=1)
             while next_date.isoweekday() not in weekdays:
                 next_date += timedelta(days=1)
 
-            lesson.lesson_date = next_date
+            lesson.date = next_date
 
         return {'type': 'ir.actions.act_window_close'}

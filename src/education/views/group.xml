@@ -7,6 +7,8 @@
             <list>
                 <field name="name"/>
                 <field name="course_id"/>
+                <field name="lesson_count"/>
+                <field name="student_count"/>
                 <field name="state"/>
                 <field name="active"/>
             </list>
@@ -19,58 +21,70 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_toggle_group"
-                            type="object"
-                            string="Deactivate"
-                            class="btn-primary"
-                            icon="fa-toggle-off"
-                            invisible="not active"/>
-
-                    <button name="action_toggle_group"
-                            type="object"
-                            string="Activate"
-                            class="btn-secondary"
-                            icon="fa-toggle-on"
-                            invisible="active"/>
-                    <button name="action_create_timetable"
-                            string="Create Timetable"
-                            type="object"
-                            class="btn-primary"
+                    <button name="action_reset_draft" type="object" string="Set to Draft"
+                            invisible="state == 'draft'"/>
+                    <button name="action_set_active" type="object" string="Set Active" class="oe_highlight"
+                            invisible="state == 'active'"/>
+                    <button name="action_set_frozen" type="object" string="Set Frozen"
+                            invisible="state == 'frozen'"/>
+                    <button name="action_set_completed" type="object" string="Set Completed"
+                            invisible="state == 'completed'"/>
+                    <button type="object" string="Create Schedule Table"
+                            name="action_create_schedule_table"
+                            class="oe_stat_button"
                             icon="fa-calendar"/>
-
-                    <field name="state" widget="statusbar" statusbar_visible="active,frozen,completed"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,frozen,completed"/>
                 </header>
+                <div class="oe_button_box" name="button_box">
+                    <button type="object"
+                            name="action_view_group_lessons"
+                            class="oe_stat_button"
+                            icon="fa-book">
+                        <field name="lesson_count" widget="statinfo" string="Lessons"/>
+                    </button>
+                </div>
                 <sheet>
                     <group>
                         <group>
                             <field name="course_id"/>
-                            <field name="teacher_ids" widget="many2many_tags"/>
-                        </group>
-                        <group>
-                            <field name="student_ids" widget="many2many_tags"/>
+                            <field name="teacher_id"/>
+                            <field name="lesson_count"/>
+                            <field name="student_count"/>
+                            <field name="schedule_table_count" string="Schedule Tables"/>
                             <field name="active"/>
                         </group>
                     </group>
-
                     <notebook>
-                        <page string="Timetables">
-                            <field name="timetable_id" create="0"/>
+                        <page string="Students">
+                            <field name="student_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="student_number"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </list>
+                            </field>
                         </page>
-
-                        <page string="Lessons">
-                            <field name="lesson_ids" context="{
-                                    'default_group_id': id,
-                                    'default_course_id': course_id,}">
-                                <list editable="bottom">
-                                    <field name="teacher_id"/>
-                                    <field name="date"/>
-                                    <field name="duration"/>
-                                    <field name="duration_uom"/>
-                                    <field name="is_demo"/>
+                        <page string="Schedule tables">
+                            <field name="schedule_table_ids" create="0">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="start_date"/>
+                                    <field name="state"/>
                                 </list>
                             </field>
                         </page>
 
+                        <page string="Lessons">
+                            <field name="lesson_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="sequence"/>
+                                    <field name="duration"/>
+                                    <field name="teacher_id"/>
+                                </list>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

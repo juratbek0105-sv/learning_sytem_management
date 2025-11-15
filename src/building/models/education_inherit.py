@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 
 class Timetable(models.Model):
-     _inherit = 'edu.timetable'
+     _inherit = 'edu.schedule.table'
 
      room_id = fields.Many2one("building.room", string="Room")
      building_id = fields.Many2one("building.building", string="Building")

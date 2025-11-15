@@ -4,7 +4,7 @@ from . import course
 from . import group
 from . import result
 from . import lesson
-from . import timetable
+from . import schedule_table
 from . import language
 from . import task
 from . import submission

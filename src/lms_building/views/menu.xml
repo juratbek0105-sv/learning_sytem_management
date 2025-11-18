@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_building_root" name="Building" sequence="4"/>
+    <menuitem id="menu_building" name="Buildings" parent="menu_building_root" action="action_building"/>
+    <menuitem id="menu_coworking" name="Co-working" parent="menu_building_root" action="action_coworking"/>
+    <menuitem id="menu_floor" name="Floors" parent="menu_building_root" action="action_floor"/>
+    <menuitem id="menu_room" name="Rooms" parent="menu_building_root" action="action_room"/>
+</odoo>

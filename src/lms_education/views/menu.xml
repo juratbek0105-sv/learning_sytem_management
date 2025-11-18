@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_education_root" name="Education" sequence="2">
+            <menuitem id="menu_education_course_root" name="Courses">
+                <menuitem id="menu_course" name="Manage Courses" action="action_course"/>
+                <menuitem id="menu_group" name="Manage Groups" action="action_group"/>
+            </menuitem>
+            <menuitem id="menu_education_lesson_root" name="Lessons and Schedule table">
+                <menuitem id="menu_lesson" name="Lessons" action="action_lesson"/>
+                <menuitem id="menu_schedule_lesson" name="Schedule Lessons" action="action_schedule_lesson"/>
+                <menuitem id="menu_edu_timetable" action="action_schedule_table"/>
+            </menuitem>
+            <menuitem id="menu_education_assignment_root" name="Assignments">
+                <menuitem id="menu_assignment" name="Assignments" action="action_assignment"/>
+                <menuitem id="menu_result" name="Results" action="action_result"/>
+                <menuitem id="menu_task" name="Tasks" action="action_task"/>
+                <menuitem id="menu_submission" name="Submissions" action="action_task_submission"/>
+            </menuitem>
+            <menuitem id="menu_education_settings_root" name="Settings">
+                <menuitem id="menu_edu_language" name="Languages" action="action_edu_language"/>
+            </menuitem>
+        </menuitem>
+    </data>
+</odoo>

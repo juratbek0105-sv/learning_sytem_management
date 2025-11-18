@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "LMS Payment",
-
+    'name': ' LMS Payment ',
+    'version': '1.0',
+    'summary': 'Manage student payments by group and course',
+    'category': 'Education',
+    'license': 'LGPL-3',
     'depends': ['user_management', 'contacts'],
-
-    # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/edu_payment.xml',
-        'views/costs.xml',
-        'views/coupon.xml',
-        'views/kpi.xml',
-        'views/salary.xml',
+        'views/payment.xml',
         'views/menu.xml',
     ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
 }
-

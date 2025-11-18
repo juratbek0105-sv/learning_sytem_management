@@ -1,9 +1,9 @@
 from odoo import models, fields
 
 class EducationStudent(models.Model):
-    _inherit = 'user.student'
+    _inherit = 'res.users'
 
-    payment_ids = fields.One2many('payment.edu.payment', 'student_id', string="Payments")
+    payment_ids = fields.One2many('payment.edu.payment', 'user_id', string="Payments")
     total_paid = fields.Monetary(string="Total Paid", compute="_compute_total_paid", currency_field="currency_id")
     currency_id = fields.Many2one('res.currency')
 

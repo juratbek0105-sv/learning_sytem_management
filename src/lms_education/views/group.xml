@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_group_list" model="ir.ui.view">
+        <field name="name">edu.group.list</field>
+        <field name="model">edu.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="group_lesson_count"/>
+                <field name="student_count"/>
+                <field name="state"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_group_form" model="ir.ui.view">
+        <field name="name">edu.group.form</field>
+        <field name="model">edu.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_reset_draft" type="object" string="Set to Draft"
+                            invisible="state == 'draft'"/>
+                    <button name="action_set_active" type="object" string="Set Active" class="oe_highlight"
+                            invisible="state == 'active'"/>
+                    <button name="action_set_frozen" type="object" string="Set Frozen"
+                            invisible="state == 'frozen'"/>
+                    <button name="action_set_completed" type="object" string="Set Completed"
+                            invisible="state == 'completed'"/>
+                    <button type="object" string="Create Schedule Table"
+                            name="action_create_schedule_table"
+                            class="oe_stat_button"
+                            icon="fa-calendar"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,frozen,completed"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_view_group_lessons"
+                                class="oe_stat_button"
+                                icon="fa-book">
+                            <field name="group_lesson_count" widget="statinfo" string="Lessons"/>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" class="oe_inline" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <group>
+                                <field name="course_id"/>
+                                <field name="teacher_id"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="student_count"/>
+                                <field name="schedule_table_count" string="Schedule Tables"/>
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Students">
+                            <field name="student_ids">
+                                <list editable="bottom">
+                                    <field name="student_id"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Schedule tables">
+                            <field name="schedule_table_ids" create="0">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="start_date"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_group" model="ir.actions.act_window">
+        <field name="name">Groups</field>
+        <field name="res_model">edu.group</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_group_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_group_form')})
+        ]"/>
+    </record>
+</odoo>

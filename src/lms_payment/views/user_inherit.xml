@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_users_form_inherit_payment" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.lms.payment</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="inside">
+                <group string="Payment Info">
+                    <field name="currency_id"/>
+                    <field name="total_paid" readonly="1"/>
+                </group>
+
+                <notebook>
+                    <page string="Payments">
+                        <field name="payment_ids" context="{'default_user_id': id}">
+                            <list editable="bottom">
+                                <field name="date"/>
+                                <field name="amount"/>
+                                <field name="group_id"/>
+                                <field name="course_id"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

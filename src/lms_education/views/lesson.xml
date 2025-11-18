@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_edu_lesson_form" model="ir.ui.view">
+        <field name="name">edu.lesson.form</field>
+        <field name="model">edu.lesson</field>
+        <field name="arch" type="xml">
+            <form string="Lesson">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="course_id"/>
+                        <field name="teacher_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="duration"/>
+                        <field name="duration_uom"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_edu_lesson_list" model="ir.ui.view">
+        <field name="name">edu.lesson.list</field>
+        <field name="model">edu.lesson</field>
+        <field name="arch" type="xml">
+            <list string="Lessons" default_group_by="course_id">
+                <field name="name"/>
+                <field name="sequence"/>
+                <field name="course_id"/>
+                <field name="teacher_ids" widget="many2many_tags"/>
+                <field name="duration"/>
+                <field name="duration_uom"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_lesson" model="ir.actions.act_window">
+        <field name="name">Lessons</field>
+        <field name="res_model">edu.lesson</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode':'list','view_id':ref('view_edu_lesson_list')}),
+            (0, 0, {'view_mode':'form','view_id':ref('view_edu_lesson_form')})
+        ]"/>
+    </record>
+</odoo>

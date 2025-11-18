@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>\
-<odoo>
-    <data>
-        <menuitem id="menu_inventory_root" name="Inventory">
-            <menuitem id="menu_device" action="action_device"/>
-        </menuitem>
-    </data>
-</odoo>

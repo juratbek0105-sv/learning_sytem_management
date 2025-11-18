@@ -22,12 +22,21 @@
                     <sheet>
                         <group>
                             <field name="student_number"/>
-                            <field name="user_id"/>
+                            <field name="email"/>
+                            <field name="login"/>
+                            <field name="phone"/>
                             <field name="company_id"/>
                         </group>
                         <notebook>
                             <page string="Teachers">
-                                <field name="teacher_ids" widget="many2many_tags"/>
+                                <field name="teacher_ids">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="email"/>
+                                        <field name="login"/>
+                                        <field name="phone"/>
+                                    </list>
+                                </field>
                             </page>
                         </notebook>
                     </sheet>

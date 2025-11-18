@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_lesson_date_wizard_form" model="ir.ui.view">
+        <field name="name">edu.lesson.date.wizard.form</field>
+        <field name="model">edu.lesson.date.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Lesson Date">
+                <group>
+                    <field name="schedule_lesson_id" readonly="1"/>
+                    <field name="option"/>
+                    <field name="new_date" invisible="option == 'auto' "/>
+                </group>
+                <footer>
+                    <button string="Apply" name="action_apply_change" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

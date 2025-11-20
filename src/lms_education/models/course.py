@@ -35,19 +35,19 @@ class EduCourse(models.Model):
 
     def action_create_group(self):
         self.ensure_one()
-        if self.state == "open":
-            return {
-                "type": "ir.actions.act_window",
-                "res_model": "edu.group",
-                "view_mode": "form",
-                "view_id": self.env.ref("lms_education.view_group_form").id,
-                "target": "current",
-                "context": {
-                    "default_course_id": self.id,
-                }
-            }
-        else:
+        if self.state != "open":
             raise ValidationError("For create group, open the course first, please")
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "edu.group",
+            "view_mode": "form",
+            "view_id": self.env.ref("lms_education.view_group_form").id,
+            "target": "current",
+            "context": {
+                "default_course_id": self.id,
+            }
+        }
 
     @api.model_create_multi
     def create(self, vals_list):

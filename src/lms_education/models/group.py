@@ -1,4 +1,6 @@
 from datetime import date
+from email.policy import default
+
 from odoo import models, fields, api, _
 
 
@@ -132,3 +134,4 @@ class GroupStudent(models.Model):
         ("inactive", "Inactive"),
         ("frozen", "Frozen")
     ], string="Status", required=True, default="inactive")
+    active = fields.Boolean(default=True)

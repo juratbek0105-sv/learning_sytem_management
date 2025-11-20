@@ -8,7 +8,9 @@
                 <group>
                     <field name="schedule_lesson_id" readonly="1"/>
                     <field name="option"/>
-                    <field name="new_date" invisible="option == 'auto' "/>
+                    <field name="new_date" invisible="option != 'manual' "/>
+                    <field name="lesson_start_time" widget="float_time" invisible="option !='manual'"/>
+                    <field name="lesson_end_time" widget="float_time" invisible="option !='manual'"/>
                 </group>
                 <footer>
                     <button string="Apply" name="action_apply_change" type="object" class="btn-primary"/>

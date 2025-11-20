@@ -1,4 +1,6 @@
 from datetime import timedelta
+from tokenize import group
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -64,6 +66,12 @@ class EduScheduleTable(models.Model):
                 total += lesson.lesson_end_time - lesson.lesson_start_time
             record.total_duration = total
 
+    @api.onchange('lesson_start_time')
+    def _onchange_lesson_start_time(self):
+        if self.lesson_start_time:
+            duration = self.group_id.course_id.duration
+            self.lesson_end_time = self.lesson_start_time + duration
+
     @api.depends('start_date', 'end_date', 'weekday_ids')
     def _compute_lesson_dates(self):
         for record in self:
@@ -117,45 +125,43 @@ class EduScheduleTable(models.Model):
         return record
 
     def generate_schedule_lessons(self):
-        if self.state == "active":
+        self.ensure_one()
+        Lesson = self.env['edu.schedule.lesson']
+        weekdays = self.weekday_ids.mapped('sequence')
+        lessons = self.group_id.group_lesson_ids.sorted('sequence')
 
-            self.ensure_one()
-            Lesson = self.env['edu.schedule.lesson']
-            weekdays = self.weekday_ids.mapped('sequence')
-            lessons = self.group_id.group_lesson_ids.sorted('sequence')
+        if not self.start_date or not self.end_date or not lessons:
+            return
 
-            if not self.start_date or not self.end_date or not lessons:
-                return
+        lesson_index = 0
+        total = len(lessons)
+        days_count = (self.end_date - self.start_date).days + 1
+        for i in range(days_count):
 
-            lesson_index = 0
-            total = len(lessons)
-            days_count = (self.end_date - self.start_date).days + 1
-            for i in range(days_count):
+            if lesson_index >= total:
+                break
 
-                if lesson_index >= total:
-                    break
+            current_date = self.start_date + timedelta(days=i)
 
-                current_date = self.start_date + timedelta(days=i)
+            if current_date.isoweekday() not in weekdays:
+                continue
+            gl = lessons[lesson_index]
+            start_time = self.lesson_start_time
+            end_time = start_time + self.group_id.course_id.duration
 
-                if current_date.isoweekday() not in weekdays:
-                    continue
-                gl = lessons[lesson_index]
+            Lesson.create({
+                'schedule_table_id': self.id,
+                'group_lesson_id': gl.id,
+                'name': gl.name,
+                'sequence': gl.sequence,
+                'date': current_date,
+                'lesson_start_time': start_time,
+                'lesson_end_time': end_time,
+                'teacher_id': self.teacher_id.id,
+                'group_id': self.group_id.id,
+            })
 
-                Lesson.create({
-                    'schedule_table_id': self.id,
-                    'group_lesson_id': gl.id,
-                    'name': gl.name,
-                    'sequence': gl.sequence,
-                    'date': current_date,
-                    'lesson_start_time': self.lesson_start_time,
-                    'lesson_end_time': self.lesson_end_time,
-                    'teacher_id': self.teacher_id.id,
-                    'group_id': self.group_id.id,
-                })
-
-                lesson_index += 1
-        else:
-            raise ValidationError("Please activate the schedule table first, to generate schedule lessons!")
+            lesson_index += 1
 
     @api.constrains('lesson_start_time', 'lesson_end_time')
     def _check_time_validity(self):

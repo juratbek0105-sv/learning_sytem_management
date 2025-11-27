@@ -9,7 +9,9 @@
     'data': [
         'security/ir.model.access.csv',
         'views/payment.xml',
+        'views/user_inherit.xml',
         'views/menu.xml',
+
     ],
     'installable': True,
     'application': True,

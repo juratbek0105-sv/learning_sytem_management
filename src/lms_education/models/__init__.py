@@ -11,4 +11,5 @@ from . import submission
 from . import user_education
 from . import weekday
 from . import schedule_lesson
+from . import schedule_student_lesson
 

@@ -20,3 +20,4 @@ class EduPayment(models.Model):
         ("online", "Online"),
     ], string="Payment Type", required=True, default="card")
     note = fields.Text()
+

@@ -7,12 +7,13 @@ class EduCourse(models.Model):
     _description = 'Course / Program'
 
     name = fields.Char(string='Course Name', required=True)
-    price = fields.Float(string="Price per month")
+    price = fields.Float(string="Price of course")
+    price_per_lesson = fields.Float(string="Price per lesson", compute="_compute_price_per_lesson")
 
     total_lessons = fields.Integer(string='Total Lessons', required=True)
     duration = fields.Float(string='Lesson Duration')
-    duration_uom = fields.Many2one("uom.uom", domain=[("category_id.name", "=", "Time")])
-
+    duration_uom = fields.Many2one("uom.uom", domain=[("category_id.name", "=", "Time")],
+                                   default=lambda self: self.env.ref("uom.product_uom_hour"))
     lesson_ids = fields.One2many('edu.lesson', 'course_id', string='Lessons / Topics')
     group_ids = fields.One2many('edu.group', 'course_id', string='Groups')
     teacher_ids = fields.Many2many("user.teacher", string="Teachers")
@@ -23,6 +24,10 @@ class EduCourse(models.Model):
         ('closed', 'Closed')
     ], default='draft', string="State")
     active = fields.Boolean(string="Active", default=True)
+
+    def _compute_price_per_lesson(self):
+        for record in self:
+            record.price_per_lesson = float(record.price) / len(record.lesson_ids)
 
     def action_open_course(self):
         self.state = "open"

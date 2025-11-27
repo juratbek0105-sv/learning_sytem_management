@@ -21,8 +21,9 @@ class Group(models.Model):
     teacher_id = fields.Many2one('user.teacher', string='Teacher')
     group_lesson_ids = fields.One2many('edu.group.lesson',"group_id", string='Lessons')
     group_lesson_count = fields.Integer(string="Lessons", compute="_compute_group_lesson_count")
-    student_ids = fields.Many2many("edu.group.student", string="Students")
+    student_ids = fields.Many2many("user.student", string="Students")
     student_count = fields.Integer(string="Students", compute="_compute_student_count")
+    group_student_ids = fields.Many2many("edu.group.student")
     schedule_table_ids = fields.One2many('edu.schedule.table', 'group_id', string=  'Timetables')
     schedule_table_count = fields.Integer(string="Schedule Tables", compute="_compute_schedule_table_count")
     company_id = fields.Many2one("res.company", string="Branch")
@@ -74,6 +75,8 @@ class Group(models.Model):
             },
             'target': 'current',
         }
+
+
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -135,3 +138,4 @@ class GroupStudent(models.Model):
         ("frozen", "Frozen")
     ], string="Status", required=True, default="inactive")
     active = fields.Boolean(default=True)
+

@@ -2,15 +2,18 @@
 {
     'name': " LMS education_payment",
 
-    # any module necessary for this one to work correctly
-    'depends': ['education', 'payment'],
-    'auto_install': ['education', 'payment'],
+    'depends': ['lms_education', 'lms_payment'],
+    'auto_install': ['lms_education', 'lms_payment'],
 
-    # always loaded
     'data': [
+        'security/ir.model.access.csv',
         'views/views.xml',
+        'views/inherit.xml',
+        'views/refuel_balance.xml',
+        'views/menu.xml',
+
+        'data/cron_withdraw.xml'
     ],
-    # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],

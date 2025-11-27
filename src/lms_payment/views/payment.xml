@@ -22,12 +22,16 @@
             <form string="Education Payment">
                 <sheet>
                     <group>
-                        <field name="user_id"/>
-                        <field name="amount"/>
-                        <field name="payment_date"/>
-                        <field name="status"/>
-                        <field name="payment_type"/>
-                        <field name="note" colspan="2"/>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="payment_date"/>
+                            <field name="status"/>
+                            <field name="payment_type"/>
+                            <field name="note" colspan="2"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

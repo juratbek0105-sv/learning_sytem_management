@@ -18,14 +18,19 @@
             <field name="name">user.student.form</field>
             <field name="model">user.student</field>
             <field name="arch" type="xml">
-                <form>
+                <form string="Student Form">
                     <sheet>
                         <group>
-                            <field name="student_number"/>
-                            <field name="email"/>
-                            <field name="login"/>
-                            <field name="phone"/>
-                            <field name="company_id"/>
+                            <group>
+                                <field name="user_id"/>
+                                <field name="student_number"/>
+                                <field name="email"/>
+                                <field name="login"/>
+                            </group>
+                            <group>
+                                <field name="phone"/>
+                                <field name="company_id"/>
+                            </group>
                         </group>
                         <notebook>
                             <page string="Teachers">
@@ -55,3 +60,4 @@
         </record>
     </data>
 </odoo>
+

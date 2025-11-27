@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_refuel_balance"
+                  name="Refuel Balance"
+                  parent="lms_payment.menu_payment_root"
+                  action="action_refuel_balance"
+                  sequence="2"/>
+
+    </data>
+</odoo>

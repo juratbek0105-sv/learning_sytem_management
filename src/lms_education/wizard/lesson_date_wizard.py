@@ -1,9 +1,6 @@
 from odoo import models, fields, api, _
 from datetime import timedelta, datetime, time
-from odoo.exceptions import UserError
-
-from odoo.odoo.exceptions import ValidationError
-
+from odoo.exceptions import UserError, ValidationError
 
 class LessonDateWizard(models.TransientModel):
     _name = 'edu.lesson.date.wizard'
@@ -15,6 +12,7 @@ class LessonDateWizard(models.TransientModel):
         ('auto', 'Set Date After Last Lesson'),
         ('skip', 'Skip the lesson')
     ], string='Change Option', required=True, default='manual')
+
 
     lesson_start_time = fields.Float(string='Start Time')
     lesson_end_time = fields.Float(string='End Time')
@@ -53,11 +51,6 @@ class LessonDateWizard(models.TransientModel):
                 next_date += timedelta(days=1)
 
             l.write({'date': next_date})
-            try:
-                l._check_conflict()
-            except ValueError as e:
-                raise UserError(_("Conflict for lesson %s: %s") % (l.name, e))
-
             previous_date = next_date
 
 
@@ -84,11 +77,6 @@ class LessonDateWizard(models.TransientModel):
                 'lesson_end_time': self.lesson_end_time
             })
 
-            try:
-                lesson._check_conflict()
-            except ValueError as e:
-                raise UserError(_("Lesson conflict detected: %s") % e)
-
             if self.new_date > old_date:
                 schedule_table = lesson.schedule_table_id
                 weekdays = schedule_table.weekday_ids.mapped('sequence')
@@ -113,10 +101,6 @@ class LessonDateWizard(models.TransientModel):
                         next_date += timedelta(days=1)
 
                     l.write({'date': next_date})
-                    try:
-                        l._check_conflict()
-                    except ValueError as e:
-                        raise UserError(_("Conflict for lesson %s: %s") % (l.name, e))
 
                     previous_date = next_date
             return
@@ -141,10 +125,7 @@ class LessonDateWizard(models.TransientModel):
                 next_date += timedelta(days=1)
 
             lesson.with_context(skip_reschedule=True).write({'date': next_date})
-            try:
-                lesson._check_conflict()
-            except ValueError as e:
-                raise UserError(_("Lesson conflict detected: %s") % e)
+
 
         elif self.option == 'skip':
             schedule_table = lesson.schedule_table_id
@@ -165,6 +146,6 @@ class LessonDateWizard(models.TransientModel):
             self.reschedule_lessons(start_from_lesson=start_from_lesson)
 
         else:
-                    raise UserError(_("Unknown option selected"))
+            raise UserError(_("Unknown option selected"))
 
         return {'type': 'ir.actions.act_window_close'}

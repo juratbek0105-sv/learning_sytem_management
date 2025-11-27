@@ -18,6 +18,14 @@
                            statusbar_colors="{'draft':'muted','done':'green'}"/>
                 </header>
                 <sheet>
+                     <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                                name="action_view_schedule_student_lessons"
+                                class="oe_stat_button"
+                                icon="fa-book">
+                            <field name="schedule_student_lesson_count" widget="statinfo" string="Lessons"/>
+                        </button>
+                    </div>
                     <group>
                         <field name="name" readonly="1"/>
                         <field name="sequence" readonly="1"/>
@@ -40,7 +48,7 @@
         <field name="name">edu.schedule.lesson.list</field>
         <field name="model">edu.schedule.lesson</field>
         <field name="arch" type="xml">
-            <list string="Scheduled Lessons" default_group_by="group_id">
+            <list string="Scheduled Lessons" default_group_by="group_id" create="0">
                 <field name="name"/>
                 <field name="sequence"/>
                 <field name="schedule_table_id"/>

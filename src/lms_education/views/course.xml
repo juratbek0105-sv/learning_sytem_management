@@ -47,6 +47,7 @@
                         <group>
                             <field name="active"/>
                             <field name="price" widget="monetary"/>
+                            <field name="price_per_lesson" widget="monetary"/>
                             <field name="teacher_ids" widget="many2many_tags"/>
                         </group>
                     </group>

@@ -22,3 +22,4 @@ class Student(models.Model):
 
 
 
+

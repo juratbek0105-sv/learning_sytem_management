@@ -1,5 +1,4 @@
 from datetime import timedelta, datetime
-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 
@@ -20,6 +19,19 @@ class ScheduleLesson(models.Model):
         ('draft', 'Draft'),
         ('done', 'Done')
     ], string='Status', default='draft')
+    schedule_student_lesson_ids = fields.One2many('edu.schedule.student.lesson', 'schedule_lesson_id')
+    schedule_student_lesson_count = fields.Integer(compute="_compute_schedule_student_lesson_count")
+
+    @api.onchange('lesson_start_time')
+    def _onchange_lesson_start_time(self):
+        if self.lesson_start_time :
+            duration = self.group_id.course_id.duration
+            self.lesson_end_time = self.lesson_start_time + duration
+
+    @api.depends('schedule_student_lesson_ids')
+    def _compute_schedule_student_lesson_count(self):
+        for record in self:
+            record.schedule_student_lesson_count = len(record.schedule_student_lesson_ids)
 
     def action_mark_done(self):
         self.state = "done"
@@ -39,6 +51,16 @@ class ScheduleLesson(models.Model):
                 'default_schedule_lesson_id': self.id,
                 'default_new_date': self.date
             },
+        }
+
+    def action_view_schedule_student_lessons(self):
+        self.ensure_one()
+        return {
+            'name': 'Schedule student lessons',
+            'type': 'ir.actions.act_window',
+            'res_model': 'edu.schedule.student.lesson',
+            'view_mode': 'list,form',
+            'domain': [('schedule_lesson_id', '=', self.id)],
         }
 
 
@@ -94,11 +116,25 @@ class ScheduleLesson(models.Model):
 
                 l.write({'date': next_date})
 
-                try:
-                    l._check_conflict()
-                except ValueError as e:
-                    raise UserError(_("Conflict for lesson %s: %s") % (l.name, e))
 
                 previous_date = next_date
 
         return True
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        lessons= super().create(vals_list)
+
+        for lesson in lessons:
+            students = lesson.group_id.student_ids
+            if not students:
+                continue
+
+            student_lesson_vals = []
+            for student in students:
+                student_lesson_vals.append({
+                    'schedule_lesson_id': lesson.id,
+                    'student_id': student.id,
+                })
+            self.env['edu.schedule.student.lesson'].create(student_lesson_vals)
+        return lessons

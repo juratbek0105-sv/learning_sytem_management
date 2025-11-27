@@ -16,6 +16,7 @@
         'views/task.xml',
         'views/schedule_table.xml',
         'views/schedule_lesson.xml',
+        'views/schedule_student_lesson.xml',
         'views/inherit_views/student_inherit.xml',
         'views/inherit_views/teacher_inherit.xml',
         'views/menu.xml',

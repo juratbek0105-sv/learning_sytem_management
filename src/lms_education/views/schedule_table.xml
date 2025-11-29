@@ -35,10 +35,9 @@
                             <field name="lesson_end_time" widget="float_time"/>
                             <field name="weekday_ids" widget="many2many_tags"
                                    options="{'no_create': True}"/>
-                            <field name="teacher_id"/>
-
                         </group>
                         <group>
+                            <field name="teacher_id"/>
                             <field name="group_id"/>
                             <field name="first_lesson_date"/>
                             <field name="last_lesson_date"/>

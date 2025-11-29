@@ -7,7 +7,6 @@ class Users(models.Model):
 
 
     passport = fields.Char(string="Passport")
-    language_ids = fields.Many2many("edu.language")
     date_of_birth = fields.Date("Birthday")
     marital_status = fields.Selection([
         ('single', 'Single'),
@@ -26,5 +25,13 @@ class Users(models.Model):
         ('hr', 'HR'),
         ('other', 'Other'),
     ], string="User Type", default='other')
-    company_id = fields.Many2one('res.company', string="Branch", default=lambda self: self.env.company, tracking=True)
+    experience_year = fields.Float()
+    work_place_ids = fields.Many2many("user.work.places")
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female')
+    ])
+
+    student_number = fields.Char()
+    teacher_ids = fields.Many2many("user.teacher")
 

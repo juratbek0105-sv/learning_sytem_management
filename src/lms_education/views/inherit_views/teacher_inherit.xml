@@ -3,29 +3,31 @@
     <data>
         <record id="view_user_teacher_inherit_subjects_groups_courses" model="ir.ui.view">
             <field name="name">user.teacher.inherit.subjects.groups.courses</field>
-            <field name="model">user.teacher</field>
-            <field name="inherit_id" ref="user_management.view_user_teacher_form"/>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_simple_form"/>
             <field name="arch" type="xml">
 
-                <xpath expr="//notebook" position="inside">
-                    <page string="Teaching Info">
-                        <group>
-                            <field name="group_ids">
-                                <list editable="bottom">
-                                    <field name="name"/>
-                                    <field name="state"/>
-                                    <field name="course_id"/>
-                                </list>
-                            </field>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Teaching Info" invisible="user_type != 'teacher'">
+                            <group>
+                                <field name="group_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="state"/>
+                                        <field name="course_id"/>
+                                    </list>
+                                </field>
 
-                            <field name="course_ids">
-                                <list editable="bottom">
-                                    <field name="name"/>
-                                    <field name="total_lessons"/>
-                                </list>
-                            </field>
-                        </group>
-                    </page>
+                                <field name="course_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="total_lessons"/>
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
                 </xpath>
 
             </field>

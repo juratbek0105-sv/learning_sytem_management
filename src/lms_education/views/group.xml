@@ -29,10 +29,6 @@
                             invisible="state == 'frozen'"/>
                     <button name="action_set_completed" type="object" string="Set Completed"
                             invisible="state == 'completed'"/>
-                    <button type="object" string="Create Schedule Table"
-                            name="action_create_schedule_table"
-                            class="oe_stat_button"
-                            icon="fa-calendar"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,active,frozen,completed"/>
                 </header>
 
@@ -44,33 +40,52 @@
                                 icon="fa-book">
                             <field name="group_lesson_count" widget="statinfo" string="Lessons"/>
                         </button>
+
+                        <button type="object"
+                                name="action_view_students"
+                                class="oe_stat_button"
+                                icon="fa-users">
+                            <field name="student_count" widget="statinfo" string="Students"/>
+                        </button>
+
+                        <button type="object"
+                                name="action_create_schedule_table"
+                                class="oe_stat_button"
+                                icon="fa-calendar">
+                            <field name="schedule_table_count" widget="statinfo" string="Schedules"/>
+                        </button>
                     </div>
+
                     <h1>
                         <field name="name" class="oe_inline" readonly="1"/>
                     </h1>
+
                     <group>
                         <group>
-                            <group>
-                                <field name="course_id"/>
-                                <field name="teacher_id"/>
-                                <field name="active"/>
-                            </group>
-                            <group>
-                                <field name="student_count"/>
-                                <field name="schedule_table_count" string="Schedule Tables"/>
-                            </group>
+                            <field name="course_id"/>
+                            <field name="teacher_id"/>
+                        </group>
+                        <group>
+                            <field name="state" invisible="1"/>
+                            <field name="active"/>
+                            <field name="company_id"/>
                         </group>
                     </group>
+
                     <notebook>
                         <page string="Students">
-                            <field name="student_ids">
+                            <field name="group_student_ids">
                                 <list editable="bottom">
-                                    <field name="student_id"/>
+                                    <field name="student_id"
+                                           domain="[('is_student', '=', True)]"
+                                           options="{'no_create': True}"/>
                                     <field name="status"/>
+                                    <field name="active" widget="boolean_toggle"/>
                                 </list>
                             </field>
                         </page>
-                        <page string="Schedule tables">
+
+                        <page string="Schedule Tables">
                             <field name="schedule_table_ids" create="0">
                                 <list>
                                     <field name="name"/>

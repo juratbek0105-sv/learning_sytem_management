@@ -1,12 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="ir_cron_auto_withdraw" model="ir.cron">
-        <field name="name">Auto Withdrawal Balance</field>
-        <field name="model_id" ref="model_payment_withdrawal_balance"/>
-        <field name="state">code</field>
-        <field name="code">model.cron_auto_withdraw()</field>
-        <field name="interval_number">1</field>
-        <field name="interval_type">days</field>
-        <field name="active" eval="True"/>
-    </record>
+    <data>
+        <record id="cron_auto_withdraw_per_lesson" model="ir.cron">
+            <field name="name">Auto Withdraw Per Lesson</field>
+            <field name="model_id" ref="lms_education.model_edu_schedule_student_lesson"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_auto_withdraw_lesson()</field>
+            <field name="active">True</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).replace(hour=2, minute=0, second=0)"/>
+        </record>
+
+        <record id="cron_auto_withdraw_per_month" model="ir.cron">
+            <field name="name">Auto Withdraw Per Month</field>
+            <field name="model_id" ref="lms_education.model_edu_schedule_student_lesson"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_withdraw_per_month()</field>
+            <field name="active">True</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="nextcall">2025-12-05 00:00:00</field>
+        </record>
+
+    </data>
 </odoo>

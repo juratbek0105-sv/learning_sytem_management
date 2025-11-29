@@ -19,7 +19,7 @@
                 </header>
                 <sheet>
                      <div class="oe_button_box" name="button_box">
-                        <button type="object"
+                        <button type="object" string="Schedule Student Lessons"
                                 name="action_view_schedule_student_lessons"
                                 class="oe_stat_button"
                                 icon="fa-book">

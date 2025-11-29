@@ -9,13 +9,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/student.xml',
-        'views/teacher.xml',
-        'views/operator.xml',
-        'views/hr.xml',
-        'views/ceo.xml',
-        'views/branch_ceo.xml',
-        'views/accountant.xml',
+        'views/workers.xml',
         'views/work_places.xml',
         'views/menu.xml',
     ],

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="edu_payment_form_inherit" model="ir.ui.view">
+        <field name="name">edu.payment.form.inherit</field>
+        <field name="model">payment.edu.payment</field>
+        <field name="inherit_id" ref="lms_payment.view_edu_payment_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <field name="schedule_student_lesson_id" invisible="detailed_type != 'lesson_payment'" onchange="1"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

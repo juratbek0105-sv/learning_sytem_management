@@ -1,5 +1,4 @@
 from datetime import timedelta
-from tokenize import group
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError

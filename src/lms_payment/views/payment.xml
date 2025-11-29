@@ -20,15 +20,35 @@
         <field name="model">payment.edu.payment</field>
         <field name="arch" type="xml">
             <form string="Education Payment">
+                <header>
+                    <button name="action_paid"
+                            string="Pay"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="status != 'draft'"/>
+
+                    <button name="action_cancelled"
+                            string="Cancel"
+                            type="object"
+                            invisible="status not in ['draft', 'paid']"/>
+
+                    <button name="action_reset_to_draft"
+                            string="Reset to Draft"
+                            type="object"
+                            invisible="status == 'draft'"/>
+
+                    <field name="status" widget="statusbar" statusbar_visible="draft,paid,cancelled"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="user_id"/>
                             <field name="amount"/>
+                            <field name="detailed_type"/>
+                            <field name="student_id" invisible="detailed_type != 'top_up_balance'"/>
                         </group>
                         <group>
                             <field name="payment_date"/>
-                            <field name="status"/>
                             <field name="payment_type"/>
                             <field name="note" colspan="2"/>
                         </group>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="edu_schedule_table_form_inherit" model="ir.ui.view">
+            <field name="name">edu.schedule.table.form</field>
+            <field name="model">edu.schedule.table</field>
+            <field name="inherit_id" ref="lms_education.view_edu_schedule_table_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='weekday_ids']" position="after">
+                   <field name="payment_for_lesson"/>
+                   <field name="per_lesson" invisible="payment_for_lesson != 'per_lesson'" onchange="1"/>
+                   <field name="per_month" invisible="payment_for_lesson != 'per_month'" onchange="1"/>
+               </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

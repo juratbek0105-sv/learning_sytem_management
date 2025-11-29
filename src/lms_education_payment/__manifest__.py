@@ -7,10 +7,10 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/inherit.xml',
-        'views/refuel_balance.xml',
-        'views/menu.xml',
+        'views/payment.xml',
+        'views/schedule_student_lesson.xml',
+        'views/schedule_table.xml',
+        'views/course.xml',
 
         'data/cron_withdraw.xml'
     ],

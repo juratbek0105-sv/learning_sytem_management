@@ -2,15 +2,9 @@ from odoo import models, fields, api
 
 
 
-class Student(models.Model):
-    _inherit = "user.student"
+class User(models.Model):
+    _inherit = "res.users"
 
     group_ids = fields.Many2many("edu.group")
     course_ids = fields.Many2many("edu.course")
 
-
-class Teacher(models.Model):
-    _inherit = "user.teacher"
-
-    group_ids = fields.Many2many("edu.group", string="Groups")
-    course_ids = fields.Many2many("edu.course", string="Courses")

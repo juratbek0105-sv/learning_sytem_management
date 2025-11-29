@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="student_form_inherit_lms_payment" model="ir.ui.view">
-        <field name="name">user.student.form.inherit</field>
-        <field name="model">user.student</field>
-        <field name="inherit_id" ref="user_management.student_form"/>
+    <record id="res_users_form_inherit_lms_payment" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
-
-            <xpath expr="//notebook" position="before">
-                <group string="Payment Info">
-                    <field name="total_paid" readonly="1" widget="monetary"/>
-                </group>
-            </xpath>
 
             <xpath expr="//notebook" position="inside">
                 <page string="Payments">
+                    <group string="Payment Info">
+                        <field name="total_paid" readonly="1" widget="monetary"/>
+                    </group>
                     <field name="payment_ids" context="{'default_user_id': id}">
                         <list editable="bottom">
                             <field name="payment_date"/>
@@ -21,6 +18,18 @@
                         </list>
                     </field>
                 </page>
+            </xpath>
+
+            <xpath expr="//div[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_balance"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa fa-money"
+                            string="Balance">
+                        <field name="balance" widget="statinfo"/>
+                    </button>
+                </div>
             </xpath>
 
         </field>

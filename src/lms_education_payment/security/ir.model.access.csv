@@ -1,3 +1,1 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_payment_refuel_balance_user,access_payment_refuel_balance_user,model_payment_refuel_balance,base.group_user,1,1,1,1
-access_payment_withdrawal_balance_user,access_payment_withdrawal_balance_user,model_payment_withdrawal_balance,base.group_user,1,1,1,1

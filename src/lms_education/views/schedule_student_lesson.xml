@@ -5,10 +5,9 @@
             <field name="name">edu.schedule.student.lesson.list</field>
             <field name="model">edu.schedule.student.lesson</field>
             <field name="arch" type="xml">
-                <list>
+                <list default_group_by="schedule_lesson_id">
                     <field name="schedule_lesson_id"/>
                     <field name="student_id"/>
-                    <field name="price" widget="monetary"/>
                 </list>
             </field>
         </record>
@@ -18,9 +17,10 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <field name="schedule_lesson_id"/>
-                        <field name="student_id"/>
-                        <field name="price" widget="monetary"/>
+                        <group>
+                            <field name="schedule_lesson_id"/>
+                            <field name="student_id"/>
+                        </group>
                     </sheet>
                 </form>
             </field>

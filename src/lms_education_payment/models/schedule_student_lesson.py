@@ -10,6 +10,7 @@ class ScheduleStudentLesson(models.Model):
 
     payment_id = fields.Many2one('payment.edu.payment', default=False)
     price = fields.Float(string="Price", compute="_compute_price", store=True)
+    teacher_salary_paid = fields.Boolean(string="Teacher Salary Paid", default=False)
 
     @api.depends('schedule_lesson_id.schedule_table_id.payment_for_lesson',
                  'schedule_lesson_id.schedule_table_id.per_lesson',

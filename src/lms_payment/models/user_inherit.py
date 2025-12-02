@@ -13,10 +13,17 @@ class EducationStudent(models.Model):
 
     def _compute_balance(self):
         for record in self:
-            top_up_balances = record.payment_ids.filtered(
-                lambda x: x.status == "paid" and x.detailed_type == "top_up_balance"
-            )
-            record.balance = sum(top_up_balances.mapped('amount'))
+            if record.user_type == "student":
+                top_up_balances = record.payment_ids.filtered(
+                    lambda x: x.detailed_type == "top_up_balance"
+                )
+                paid_payments = top_up_balances.filtered(lambda x: x.status == "paid")
+                record.balance = sum(paid_payments.mapped('amount'))
+            elif record.user_type == "teacher":
+                salaries = record.payment_ids.filtered(lambda x: x.detailed_type == "teacher_salary")
+                salary_paid = salaries.filtered(lambda x: x.status == "paid")
+                record.balance = sum(salary_paid.mapped('amount'))
+
     def action_balance(self):
         self.ensure_one()
         return {

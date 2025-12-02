@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="menu_edu_payment_lesson_payments" action="action_edu_payment_lesson_payments"
+                  parent="lms_payment.menu_payment_root"/>
+        <menuitem id="menu_edu_payment_teacher_salaries" action="action_edu_payment_teacher_salaries"
+                  parent="lms_payment.menu_payment_root"/>
+    </data>
+</odoo>

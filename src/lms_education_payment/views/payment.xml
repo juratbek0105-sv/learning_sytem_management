@@ -8,8 +8,33 @@
 
             <xpath expr="//field[@name='detailed_type']" position="after">
                 <field name="schedule_student_lesson_id" invisible="detailed_type != 'lesson_payment'" onchange="1"/>
+                <field name="teacher_id" invisible="detailed_type != 'teacher_salary'" onchange="1"/>
             </xpath>
 
         </field>
+    </record>
+
+     <record id="action_edu_payment_lesson_payments" model="ir.actions.act_window">
+        <field name="name">Lesson payments</field>
+        <field name="res_model">payment.edu.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('detailed_type', '=', 'lesson_payment')]</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('lms_payment.view_edu_payment_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('lms_payment.view_edu_payment_form')})
+        ]"/>
+    </record>
+
+    <record id="action_edu_payment_teacher_salaries" model="ir.actions.act_window">
+        <field name="name">Teacher Salaries</field>
+        <field name="res_model">payment.edu.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('detailed_type', '=', 'teacher_salary')]</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('lms_payment.view_edu_payment_list')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('lms_payment.view_edu_payment_form')})
+        ]"/>
     </record>
 </odoo>

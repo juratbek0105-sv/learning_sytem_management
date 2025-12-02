@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <menuitem id="menu_payment_root" name="Payment" sequence="3">
-            <menuitem id="menu_edu_payment" action="action_edu_payment"/>
+            <menuitem id="menu_edu_payment_top_up_balance" action="action_edu_payment_top_up_balance"/>
         </menuitem>
     </data>
 </odoo>

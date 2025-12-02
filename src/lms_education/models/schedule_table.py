@@ -17,7 +17,7 @@ class EduScheduleTable(models.Model):
     lesson_end_time = fields.Float(string='Lesson End Time', required=True)
 
     weekday_ids = fields.Many2many("edu.weekday")
-    teacher_id = fields.Many2one('user.teacher', string='Teacher')
+    teacher_id = fields.Many2one('res.users', string='Teacher', domain=[("user_type", "=", "teacher")])
     company_id = fields.Many2one("res.company", string="Branch")
     schedule_lesson_ids = fields.One2many('edu.schedule.lesson', 'schedule_table_id')
     state = fields.Selection([

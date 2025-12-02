@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'views/workers.xml',
         'views/work_places.xml',
+        'views/partner.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

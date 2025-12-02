@@ -44,7 +44,7 @@
                         <group>
                             <field name="user_id"/>
                             <field name="amount"/>
-                            <field name="detailed_type"/>
+                            <field name="detailed_type" invisible="0"/>
                             <field name="student_id" invisible="detailed_type != 'top_up_balance'"/>
                         </group>
                         <group>
@@ -71,10 +71,11 @@
         </field>
     </record>
 
-    <record id="action_edu_payment" model="ir.actions.act_window">
-        <field name="name">Payments</field>
+    <record id="action_edu_payment_top_up_balance" model="ir.actions.act_window">
+        <field name="name">Top up Balance</field>
         <field name="res_model">payment.edu.payment</field>
         <field name="view_mode">list,form</field>
+        <field name="domain">[('detailed_type', '=', 'top_up_balance')]</field>
         <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('view_edu_payment_list')}),

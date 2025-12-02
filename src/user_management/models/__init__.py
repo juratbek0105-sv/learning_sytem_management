@@ -1,4 +1,4 @@
-from . import user
+from . import partner
 from . import teacher
 from . import student
 from . import accountant

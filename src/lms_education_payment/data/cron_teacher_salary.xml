@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="ir_cron_teacher_salary_monthly" model="ir.cron">
+            <field name="name">Pay Teacher Salaries Monthly</field>
+            <field name="model_id" ref="lms_education.model_edu_group"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_pay_teacher_salary_monthly()</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(minutes=1))"/>
+        </record>
+
+        <record id="cron_pay_teacher_salary_per_lesson" model="ir.cron">
+            <field name="name">Pay Teacher Salary Per Lesson</field>
+            <field name="model_id" ref="lms_education.model_edu_group"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_pay_teacher_salary_per_lesson()</field>
+            <field name="active">True</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(minutes=1))"/>
+        </record>
+    </data>
+</odoo>

@@ -8,6 +8,7 @@
                 <list default_group_by="schedule_lesson_id">
                     <field name="schedule_lesson_id"/>
                     <field name="student_id"/>
+                    <field name="group_id"/>
                 </list>
             </field>
         </record>
@@ -20,6 +21,7 @@
                         <group>
                             <field name="schedule_lesson_id"/>
                             <field name="student_id"/>
+                            <field name="group_id"/>
                         </group>
                     </sheet>
                 </form>

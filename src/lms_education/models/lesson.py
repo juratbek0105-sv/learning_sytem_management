@@ -12,5 +12,5 @@ class EduLesson(models.Model):
     duration = fields.Float(string='Duration')
     duration_uom = fields.Many2one("uom.uom", required=True, domain=[("category_id.name", "=", "Time")])
     course_id = fields.Many2one('edu.course', string='Course', required=True)
-    teacher_ids = fields.Many2many('user.teacher', string='Teachers', related="course_id.teacher_ids")
+    teacher_ids = fields.Many2many('res.users', domain=[("user_type", "=", "teacher")], string='Teachers', related="course_id.teacher_ids")
 

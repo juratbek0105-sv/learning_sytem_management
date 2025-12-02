@@ -16,7 +16,7 @@ class Group(models.Model):
     ], default='draft', string="State")
 
     course_id = fields.Many2one('edu.course', string='Course', required=True)
-    teacher_id = fields.Many2one('user.teacher', string='Teacher')
+    teacher_id = fields.Many2one('res.users', domain=[("user_type", "=", "teacher")], string='Teacher')
     group_lesson_ids = fields.One2many('edu.group.lesson', "group_id", string='Lessons')
     group_lesson_count = fields.Integer(string="Lessons", compute="_compute_group_lesson_count")
 
@@ -29,12 +29,11 @@ class Group(models.Model):
     )
     student_count = fields.Integer(string="Students", compute="_compute_student_count")
 
-    # Detailed student relationship with status
     group_student_ids = fields.One2many('edu.group.student', 'group_id', string='Group Students')
 
     schedule_table_ids = fields.One2many('edu.schedule.table', 'group_id', string='Timetables')
     schedule_table_count = fields.Integer(string="Schedule Tables", compute="_compute_schedule_table_count")
-    company_id = fields.Many2one("res.company", string="Branch")
+    company_id = fields.Many2one("res.company", string="Branch",default=lambda self: self.env.company.id)
 
     @api.depends('group_student_ids', 'group_student_ids.student_id', 'group_student_ids.status')
     def _compute_student_ids(self):

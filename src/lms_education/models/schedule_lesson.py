@@ -16,7 +16,7 @@ class ScheduleLesson(models.Model):
     date = fields.Date(string='Lesson Date', required=True)
     lesson_start_time = fields.Float(string='Start Time', required=True)
     lesson_end_time = fields.Float(string='End Time', required=True)
-    teacher_id = fields.Many2one('user.teacher', string='Teacher', related='group_id.teacher_id', store=True)
+    teacher_id = fields.Many2one('res.users', domain=[("user_type", "=", "teacher")], string='Teacher', related='group_id.teacher_id', store=True)
     group_id = fields.Many2one('edu.group', string='Group', related='schedule_table_id.group_id', store=True)
     group_lesson_id = fields.Many2one('edu.group.lesson', string='Group Lesson')
     state = fields.Selection([

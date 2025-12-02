@@ -4,3 +4,7 @@ from . import payment
 from . import schedule_table
 from . import schedule_student_lesson
 from . import student
+from . import group
+from . import branch
+
+

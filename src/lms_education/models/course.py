@@ -16,7 +16,7 @@ class EduCourse(models.Model):
                                    default=lambda self: self.env.ref("uom.product_uom_hour"))
     lesson_ids = fields.One2many('edu.lesson', 'course_id', string='Lessons / Topics')
     group_ids = fields.One2many('edu.group', 'course_id', string='Groups')
-    teacher_ids = fields.Many2many("user.teacher", string="Teachers")
+    teacher_ids = fields.Many2many("res.users", string="Teachers", domain=[("user_type", "=", "teacher")],)
 
     state = fields.Selection([
         ('draft', 'Draft'),

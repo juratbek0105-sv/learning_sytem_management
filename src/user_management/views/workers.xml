@@ -1,49 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_users_form_worker_info" model="ir.ui.view">
-        <field name="name">res.users.worker.info.form</field>
-        <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_form"/>
-
-        <field name="arch" type="xml">
-            <xpath expr="//notebook" position="inside">
-                <page string="Worker Information"
-                      invisible="user_type == 'student'">
-                    <group>
-                        <field name="date_of_birth"/>
-                        <field name="marital_status"/>
-                        <field name="experience_year"/>
-                        <field name="gender"/>
-                    </group>
-                    <group>
-                        <field name="work_place_ids" widget="many2many_tags"/>
-                        <field name="children_count"/>
-                    </group>
-                </page>
-            </xpath>
-
-            <xpath expr="//notebook" position="inside">
-                <page string="Education info" invisible="user_type != 'student'">
-                    <group>
-                        <field name="student_number"/>
-                    </group>
-                    <seperator/>
-                    <group string="Teachers">
-                        <field name="teacher_ids"/>
-                    </group>
-                </page>
-            </xpath>
-
-        </field>
-    </record>
-
     <record id="action_user_accountant" model="ir.actions.act_window">
         <field name="name">Accountants</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">list,form</field>
         <field name="context">{'default_user_type': 'accountant'}</field>
         <field name="domain">[('user_type', '=', 'accountant')]</field>
-         <field name="view_ids" eval="[
+        <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_users_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_form')})
@@ -55,7 +18,7 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'default_user_type': 'branch_ceo'}}</field>
         <field name="domain">[('user_type', '=', 'branch_ceo')]</field>
-         <field name="view_ids" eval="[
+        <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_users_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_form')})
@@ -67,7 +30,7 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'default_user_type': 'ceo'}</field>
         <field name="domain">[('user_type', '=', 'ceo')]</field>
-         <field name="view_ids" eval="[
+        <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_users_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_form')})
@@ -79,7 +42,7 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'default_user_type': 'hr'}</field>
         <field name="domain">[('user_type', '=', 'hr')]</field>
-         <field name="view_ids" eval="[
+        <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_users_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_form')})
@@ -91,7 +54,7 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'default_user_type': 'operator'}</field>
         <field name="domain">[('user_type', '=', 'operator')]</field>
-         <field name="view_ids" eval="[
+        <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_users_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_form')})
@@ -103,7 +66,7 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'default_user_type': 'teacher'}</field>
         <field name="domain">[('user_type', '=', 'teacher')]</field>
-         <field name="view_ids" eval="[
+        <field name="view_ids" eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_users_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_form')})

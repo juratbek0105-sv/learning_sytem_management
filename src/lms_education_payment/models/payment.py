@@ -7,5 +7,7 @@ class Payment(models.Model):
     course_id = fields.Many2one("edu.course", string="Course", ondelete="set null")
     detailed_type = fields.Selection(selection_add=[
         ("lesson_payment", "Lesson Payment"),
-    ], ondelete={"lesson_payment": "cascade"}, required=True, string='Payment Category')
-    schedule_student_lesson_id = fields.Many2one("edu.schedule.student.lesson", string="ScheduleStudentLesson")
+        ("teacher_salary", "Teacher salaries")
+    ],string='Payment Category')
+    schedule_student_lesson_id = fields.Many2one("edu.schedule.student.lesson", string="Schedule Student Lesson")
+    teacher_id = fields.Many2one('res.users', string="Teacher")

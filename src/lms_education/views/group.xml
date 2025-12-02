@@ -29,6 +29,11 @@
                             invisible="state == 'frozen'"/>
                     <button name="action_set_completed" type="object" string="Set Completed"
                             invisible="state == 'completed'"/>
+                    <button type="object" string="Create schedule table"
+                            name="action_create_schedule_table"
+                            class="oe_stat_button"
+                            icon="fa-calendar">
+                    </button>
                     <field name="state" widget="statusbar" statusbar_visible="draft,active,frozen,completed"/>
                 </header>
 
@@ -46,13 +51,6 @@
                                 class="oe_stat_button"
                                 icon="fa-users">
                             <field name="student_count" widget="statinfo" string="Students"/>
-                        </button>
-
-                        <button type="object"
-                                name="action_create_schedule_table"
-                                class="oe_stat_button"
-                                icon="fa-calendar">
-                            <field name="schedule_table_count" widget="statinfo" string="Schedules"/>
                         </button>
                     </div>
 
@@ -76,9 +74,7 @@
                         <page string="Students">
                             <field name="group_student_ids">
                                 <list editable="bottom">
-                                    <field name="student_id"
-                                           domain="[('is_student', '=', True)]"
-                                           options="{'no_create': True}"/>
+                                    <field name="student_id"/>
                                     <field name="status"/>
                                     <field name="active" widget="boolean_toggle"/>
                                 </list>

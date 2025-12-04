@@ -12,6 +12,8 @@
         'views/user_inherit.xml',
         'views/menu.xml',
 
+        'data/payment_sequences.xml',
+
     ],
     'installable': True,
     'application': True,

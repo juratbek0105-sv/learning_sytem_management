@@ -29,22 +29,38 @@
                 </header>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="start_date"/>
-                            <field name="lesson_start_time" widget="float_time"/>
-                            <field name="lesson_end_time" widget="float_time"/>
-                            <field name="weekday_ids" widget="many2many_tags"
-                                   options="{'no_create': True}"/>
+                        <group string="Schedule Information" colspan="2">
+                            <group>
+                                <field name="start_date"/>
+                                <field name="lesson_start_time" widget="float_time"/>
+                                <field name="lesson_end_time" widget="float_time"/>
+                            </group>
+
+                            <group>
+                                <field name="weekday_ids"
+                                       widget="many2many_tags"
+                                       options="{'no_create': True}"/>
+                            </group>
                         </group>
-                        <group>
+
+                        <group string="Group Details" colspan="2">
+                            <group>
+                                <field name="group_id"/>
+                                <field name="first_lesson_date" />
+                                <field name="last_lesson_date"/>
+                            </group>
+
+                            <group>
+                                <field name="end_date"/>
+                                <field name="total_duration"/>
+                            </group>
+                        </group>
+
+                        <group string="Teacher Details">
                             <field name="teacher_id"/>
-                            <field name="group_id"/>
-                            <field name="first_lesson_date"/>
-                            <field name="last_lesson_date"/>
-                            <field name="end_date"/>
-                            <field name="total_duration"/>
                         </group>
                     </group>
+
                     <notebook>
                         <page string="Scheduled Lessons">
                             <field name="schedule_lesson_ids">

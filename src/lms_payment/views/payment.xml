@@ -5,6 +5,7 @@
         <field name="model">payment.edu.payment</field>
         <field name="arch" type="xml">
             <list string="Education Payments">
+                <field name="name"/>
                 <field name="user_id"/>
                 <field name="amount"/>
                 <field name="payment_date"/>
@@ -24,35 +25,53 @@
                     <button name="action_paid"
                             string="Pay"
                             type="object"
-                            class="oe_highlight"
+                            class="btn-primary"
                             invisible="status != 'draft'"/>
 
                     <button name="action_cancelled"
                             string="Cancel"
                             type="object"
-                            invisible="status not in ['draft', 'paid']"/>
+                            class="btn-secondary"
+                            invisible="status not in ['draft','paid']"/>
 
                     <button name="action_reset_to_draft"
                             string="Reset to Draft"
                             type="object"
+                            class="btn-light"
                             invisible="status == 'draft'"/>
 
-                    <field name="status" widget="statusbar" statusbar_visible="draft,paid,cancelled"/>
+                    <field name="status"
+                           widget="statusbar"
+                           statusbar_visible="draft,paid,cancelled"
+                           class="oe_status"/>
                 </header>
                 <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
                     <group>
-                        <group>
+                        <group string="General Information" col="2">
                             <field name="user_id"/>
-                            <field name="amount"/>
-                            <field name="detailed_type" invisible="0"/>
-                            <field name="student_id" invisible="detailed_type != 'top_up_balance'"/>
-                        </group>
-                        <group>
                             <field name="payment_date"/>
                             <field name="payment_type"/>
-                            <field name="note" colspan="2"/>
+                            <field name="detailed_type"/>
+                        </group>
+                        <group string="Payment Details" col="2">
+                            <field name="amount"/>
+                            <field name="student_id"
+                                   invisible="detailed_type != 'top_up_balance'"/>
+                            <field name="teacher_id"
+                                   invisible="detailed_type != 'teacher_salary'"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="note" nolabel="1"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

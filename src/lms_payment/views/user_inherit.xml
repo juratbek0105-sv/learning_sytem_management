@@ -9,9 +9,18 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Payments">
                     <group string="Payment Info">
-                        <field name="total_paid" readonly="1" widget="monetary"/>
+                        <field name="total_paid_student" invisible="user_type != 'student'" readonly="1" widget="monetary"/>
+                        <field name="total_paid_teacher" invisible="user_type != 'teacher'" readonly="1" widget="monetary"/>
                     </group>
-                    <field name="payment_ids" context="{'default_user_id': id}">
+                    <field name="student_payment_ids" context="{'default_user_id': id}"
+                        invisible="user_type != 'student'">
+                        <list editable="bottom">
+                            <field name="payment_date"/>
+                            <field name="amount" widget="monetary"/>
+                        </list>
+                    </field>
+                    <field name="teacher_payment_ids" context="{'default_user_id': id}"
+                        invisible="user_type != 'teacher'">
                         <list editable="bottom">
                             <field name="payment_date"/>
                             <field name="amount" widget="monetary"/>

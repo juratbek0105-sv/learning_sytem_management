@@ -6,12 +6,6 @@
             <field name="model">edu.group</field>
             <field name="inherit_id" ref="lms_education.view_group_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='teacher_id']" position="after">
-                    <field name="teacher_portion_type"/>
-                    <field name="teacher_portion_fixed" invisible="teacher_portion_type != 'fixed'"/>
-                    <field name="teacher_portion_percentage" invisible="teacher_portion_type != 'percentage'"/>
-                    <field name="teacher_salary_amount"/>
-                </xpath>
                 <xpath expr="//div[@name='button_box']" position="inside">
                     <button name="action_view_balance" type="object" class="oe_stat_button"
                             string="View Balance" icon="fa-money">

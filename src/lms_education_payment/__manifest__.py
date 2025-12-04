@@ -10,7 +10,6 @@
         'views/payment.xml',
         'views/schedule_student_lesson.xml',
         'views/schedule_table.xml',
-        'views/course.xml',
         'views/group.xml',
         'views/branch.xml',
         'views/payment_menu_items.xml',

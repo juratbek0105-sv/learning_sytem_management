@@ -6,9 +6,10 @@ class EduPayment(models.Model):
     _description = 'Edu Payment'
     _rec_name = "name"
 
-    name = fields.Char(string="Payment Name", copy=False, readonly=True)
+    name = fields.Char(string="Payment Name", readonly=True, copy=False)
     user_id = fields.Many2one("res.users", string="User", default=lambda self: self.env.user)
-    amount = fields.Float(string="Amount")
+    amount = fields.Monetary(string="Amount", currency_field='currency_id')
+    currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
     payment_date = fields.Date(string="Payment Date", default=fields.Date.today(), required=True)
     status = fields.Selection([
         ('draft', 'Draft'),
@@ -25,7 +26,8 @@ class EduPayment(models.Model):
     detailed_type = fields.Selection([
         ('top_up_balance', 'Top Up Balance')
     ],  default='top_up_balance', string='Payment Category')
-    student_id = fields.Many2one("res.partner", string="Student")
+    student_id = fields.Many2one("res.partner", string="Student", domain=[('user_type', '=', 'student')])
+    teacher_id = fields.Many2one("res.users", domain=[('user_type', '=', 'teacher')])
     branch_id = fields.Many2one('res.company', default=lambda self: self.env.user.company_id.id)
 
 
@@ -39,23 +41,21 @@ class EduPayment(models.Model):
         self.write({'status': 'draft'})
 
     @api.model
-    def create(self, vals):
-        """Automatically generate a descriptive name for the payment"""
-        if not vals.get('name'):
-            today_str = fields.Date.today().strftime('%Y-%m-%d')
-            dt = vals.get('detailed_type')
-            if dt == 'top_up_balance' and vals.get('student_id'):
-                student = self.env['res.partner'].browse(vals['student_id'])
-                vals['name'] = f"Top-up for {student.name} on {today_str}"
-            elif dt == 'lesson_payment' and vals.get('student_id') and vals.get('group_id'):
-                student = self.env['res.partner'].browse(vals['student_id'])
-                group = self.env['edu.group'].browse(vals['group_id'])
-                vals['name'] = f"Lesson payment for {student.name} ({group.name}) on {today_str}"
-            elif dt == 'teacher_salary' and vals.get('teacher_id') and vals.get('group_id'):
-                teacher = self.env['res.partner'].browse(vals['teacher_id'])
-                group = self.env['edu.group'].browse(vals['group_id'])
-                vals['name'] = f"Teacher salary for {teacher.name} ({group.name}) - {today_str}"
-            else:
-                vals['name'] = f"Payment {today_str}"
-        return super(EduPayment, self).create(vals)
+    def _generate_payment_name(self, vals):
+        dt = vals.get('detailed_type')
 
+        if dt == 'teacher_salary':
+            return self.env['ir.sequence'].next_by_code('payment.teacher.salary')
+
+        if dt == 'top_up_balance':
+            return self.env['ir.sequence'].next_by_code('payment.student.topup')
+
+        return self.env['ir.sequence'].next_by_code('payment.edu.payment')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get('name'):
+                vals['name'] = self._generate_payment_name(vals)
+
+        return super().create(vals_list)

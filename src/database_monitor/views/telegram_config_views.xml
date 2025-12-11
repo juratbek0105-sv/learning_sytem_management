@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Telegram Configuration Form View -->
+    <record id="view_telegram_config_form" model="ir.ui.view">
+        <field name="name">telegram.config.form</field>
+        <field name="model">telegram.config</field>
+        <field name="arch" type="xml">
+            <form string="Telegram Configuration">
+                <header>
+                    <button name="test_connection" type="object" string="Test Connection" 
+                            class="oe_highlight" icon="fa-paper-plane"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" 
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "active"}'/>
+                        </button>
+                    </div>
+                    
+                    <group>
+                        <group string="Bot Configuration">
+                            <field name="name"/>
+                            <field name="bot_token" password="True"/>
+                            <field name="chat_id"/>
+                            <field name="database_name" readonly="1"/>
+                        </group>
+                        
+                        <group string="Alert Settings">
+                            <field name="send_server_errors"/>
+                            <field name="send_client_errors"/>
+                            <field name="send_error_alerts"/>
+                            <field name="send_warning_alerts"/>
+                            <field name="send_info_alerts"/>
+                            <field name="include_traceback"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Setup Instructions">
+                            <group>
+                                <div class="alert alert-info" role="alert">
+                                    <h4>Setup Instructions:</h4>
+                                    <ol>
+                                        <li><strong>Create a Telegram Bot:</strong>
+                                            <ul>
+                                                <li>Open Telegram and search for <code>@BotFather</code></li>
+                                                <li>Send <code>/newbot</code> command</li>
+                                                <li>Follow the instructions and copy the <strong>Bot Token</strong></li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Get Chat ID:</strong>
+                                            <ul>
+                                                <li>Create a group in Telegram</li>
+                                                <li>Add your bot to the group</li>
+                                                <li>Send a message in the group</li>
+                                                <li>Visit: <code>https://api.telegram.org/bot&lt;YOUR_BOT_TOKEN&gt;/getUpdates</code></li>
+                                                <li>Look for <code>"chat":{"id":-XXXXXXXXX</code> (negative number)</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Configure:</strong>
+                                            <ul>
+                                                <li>Paste the Bot Token and Chat ID above</li>
+                                                <li>Click "Test Connection" to verify</li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </group>
+                        </page>
+                        
+                        <page string="Alert Types">
+                            <group>
+                                <div class="alert alert-success" role="alert">
+                                    <h4>What Errors Will Be Sent:</h4>
+                                    <ul>
+                                        <li><strong>Server Errors:</strong> Python errors, database errors, server crashes</li>
+                                        <li><strong>Client Errors:</strong> JavaScript errors, frontend issues, UncaughtPromiseError</li>
+                                        <li><strong>Email Errors:</strong> Failed email sending attempts</li>
+                                        <li><strong>Cron Errors:</strong> Scheduled action failures</li>
+                                        <li><strong>Critical Errors:</strong> Always sent regardless of settings</li>
+                                    </ul>
+                                    <p><strong>Each alert includes:</strong></p>
+                                    <ul>
+                                        <li>Error type and level</li>
+                                        <li>Full error message</li>
+                                        <li>Stack trace (if enabled)</li>
+                                        <li>🔗 <strong>Direct link to view error in Odoo</strong></li>
+                                        <li>Timestamp</li>
+                                    </ul>
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Telegram Configuration list View -->
+    <record id="view_telegram_config_list" model="ir.ui.view">
+        <field name="name">telegram.config.list</field>
+        <field name="model">telegram.config</field>
+        <field name="arch" type="xml">
+            <list string="Telegram Configurations">
+                <field name="name"/>
+                <field name="database_name"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="send_error_alerts" widget="boolean_toggle"/>
+                <field name="send_warning_alerts" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Telegram Configuration Action -->
+    <record id="action_telegram_config" model="ir.actions.act_window">
+        <field name="name">Telegram Error Monitor</field>
+        <field name="res_model">telegram.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configure Telegram Error Monitoring
+            </p>
+            <p>
+                Set up your Telegram bot to receive real-time alerts for all Odoo errors.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_telegram_root"
+              name="Telegram Monitor"
+              sequence="100"
+              web_icon="database_monitor,static/description/icon.png"/>
+              
+    <menuitem id="menu_telegram_config"
+              name="Configuration"
+              parent="menu_telegram_root"
+              action="action_telegram_config"
+              sequence="10"/>
+
+</odoo>
